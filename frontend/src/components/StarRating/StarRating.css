@@ -1,0 +1,23 @@
+.stars {
+  display: flex;
+  gap: 5px;
+  font-size: 24px;
+  
+}
+
+.stars span {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.stars span:hover {
+  transform: scale(1.2);
+}
+
+.filled {
+  color: #f5a623;
+}
+
+.empty {
+  color: #ddd;
+}

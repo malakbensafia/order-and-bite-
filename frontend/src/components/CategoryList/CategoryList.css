@@ -1,0 +1,110 @@
+.categories{
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+
+}
+.categories h1{
+    color:#a47251;
+    font-weight: 500;
+    margin-left: 10px;
+
+}
+.categories-text{
+    max-width: 60%;
+    columns:#723e1b;
+    color:#723e1b;
+    margin-left: 10px;
+
+}
+
+
+.categories-list {
+  display: flex;
+  gap: 30px;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  scroll-behavior: smooth;
+
+  margin: 20px 0px;
+  padding: 10px 0;
+
+  cursor: grab;
+    overscroll-behavior-x: contain;
+
+  -webkit-overflow-scrolling: touch;
+}
+
+.categories-list::-webkit-scrollbar{
+    display: none;
+}
+
+.categories-list-item {
+  text-align: center;
+  flex: 0 0 auto;
+  min-width: 100px;
+}
+
+/* 🔥 IMAGE EN CERCLE */
+.categories-list-item img {
+  width: 7.5vw;
+  min-width:80px;
+  cursor:pointer;
+  height: 100px;
+  border-radius: 50%;  /* cercle */
+  object-fit: cover;   /* pas déformée */
+  display: block;
+  margin: 0 auto;
+  transition: 0.3s;
+}
+.categories-list-item p {
+    margin-top: 10px;
+    color:#723e1b;
+    font-size: max(1.4vw,16px);
+    cursor: pointer;
+
+}
+.categories-list hr{
+    margin:10px 0px;
+    height:2px;
+    background-color:aliceblue;
+    border:none;
+}
+
+
+/* effet hover optionnel */
+.categories-list-item img:hover {
+  transform: scale(1.1);
+}
+.categories-list-item  img.active{
+    border:4px solid #723e1b;
+    padding:2px;
+
+}
+@media (max-width: 600px) {
+  .categories h1 {
+    font-size: 20px;
+    margin-left: 5px;
+  }
+
+  .categories-text {
+    font-size: 14px;
+    margin-left: 5px;
+  }
+
+  .categories-list {
+    gap: 15px;
+    padding: 5px 10px;
+  }
+
+  .categories-list-item img {
+    width: 75px;
+    height: 75px;
+  }
+
+  .categories-list-item p {
+    font-size: 12px;
+  }
+}
