@@ -12,8 +12,6 @@ import dessert from './dessert.jpg'
 import drink from './drink.jpg'
 import sauce from './sauce.jpg'
 import pasta from './pasta.jpg'
-import pizzamarinara from './pizzamarinara.jpg'
-import elkburger from './elkburger.jpg'
 import spaghetticarbonara from './spaghetticarbonara.jpg'
 import discount10 from './discount10.png'
 import discount15 from './discount15.png'
@@ -25,6 +23,7 @@ import twitter from './twitter.png'
 import linkedin from './linkedin.png'
 import lg from './lg.png'
 import BBQburger from './BBQburger.jpg'
+import elkburger from './elkburger.jpg'
 import cheeseburger from './cheeseburger.jpg'
 import doublecheeseburger from './doublecheeseburger.jpg'
 import pattymelt from './pattymelt.jpg'
@@ -32,6 +31,7 @@ import salmonburger from './salmonburger.jpg'
 import turkeyburger from './turkeyburger.jpg'
 
 import pizzamargharita from './pizzamargharita.jpg'
+import pizzamarinara from './pizzamarinara.jpg'
 import pizzaquatrefromage from './pizzaquatrefromage.jpg'
 import diavolapizza from './diavolapizza.jpg'
 import pizzapeperonni from './pizzapeperonni.jpg'
@@ -630,18 +630,68 @@ export const food_list = [
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 ]
+
+// 🔥 MAP IMAGES SUPABASE → REACT
+export const imagesMap = {
+  "BBQburger.jpg": BBQburger,
+  "cheeseburger.jpg": cheeseburger,
+  "doublecheeseburger.jpg": doublecheeseburger,
+  "pattymelt.jpg": pattymelt,
+  "elkburger.jpg":elkburger,
+  "salmonburger.jpg": salmonburger,
+  "turkeyburger.jpg": turkeyburger,
+   
+  "pizzamarinara.jpg":pizzamarinara,
+  "pizzamargharita.jpg": pizzamargharita,
+  "pizzaquatrefromage.jpg": pizzaquatrefromage,
+  "diavolapizza.jpg": diavolapizza,
+  "pizzapeperonni.jpg": pizzapeperonni,
+  "pizzaviandehachee.jpg": pizzaviandehachee,
+
+  "alfredopasta.jpg": alfredopasta,
+  "bolognese.jpg": bolognese,
+  "meatballs.jpg": meatballs,
+  "raviole.jpg": raviole,
+
+  "barbecusticks.jpg": barbecusticks,
+  "cotes.jpg": cotes,
+  "salmon.jpg": salmon,
+  "meatrice.jpg": meatrice,
+  "poulet.jpg": poulet,
+  "steak.jpg": steak,
+
+  "saladebrocoli.jpg": saladebrocoli,
+  "saladecomcombre.jpg": saladecomcombre,
+  "saladeepinard.jpg": saladeepinard,
+  "saladepasta.jpg": saladepasta,
+  "saladepois.jpg": saladepois,
+  "saladenormale.jpg": saladenormale,
+
+  "vegpizza.jpg": vegpizza,
+  "vegburger.jpg": vegburger,
+  "vegetarianmeatballs.jpg": vegetarianmeatballs,
+  "vegetarianlasagna.jpg": vegetarianlasagna,
+  "pumpkinsoup.jpg": pumpkinsoup,
+
+  "couscouss.jpg": couscouss,
+  "shakshouka.jpg": shakshouka,
+  "baghrir.jpg": baghrir,
+  "mahjouba.jpg": mahjouba,
+
+  "lemontart.jpg": lemontart,
+  "chocolatecake.jpg": chocolatecake,
+  "cheesecake.jpg": cheesecake,
+  "tiramisu.jpg": tiramisu,
+  "chocogelato.jpg": chocogelato,
+
+  "icedtea.jpg": icedtea,
+  "coffe.jpg": coffe,
+  "lemon.jpg": lemon,
+  "chocolatemilkshake.jpg": chocolatemilkshake,
+  "milk.jpg": milk,
+  "orangejuice.jpg": orangejuice,
+}
 
 
 
