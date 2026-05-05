@@ -1,19 +1,25 @@
 
-.navbar{
-    padding:20px 0px;
-    display:flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 0;
-    padding-top: 0;
+.navbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 20px 40px;
+
+  background: transparent; /* 🔥 IMPORTANT */
 }
 .navbar .logo {
-  width: 150px;
+  width: clamp(90px, 10vw, 150px);
   height: auto;
-  margin-left: 45px;
+  margin-left: 20px;
   object-fit: contain;
 }
-
 
 .cart-wrapper img {
   width: 150px;
@@ -24,7 +30,7 @@
     display:flex;
     list-style: none;
     gap: 20px;
-    color: #a47251;
+    color:#3E2C23;
     font-size: 18px;
 
 }
@@ -38,12 +44,12 @@
 }
 .navbar-button{
     background-color:transparent;
-    font-size: 16PX;
-    color: #a47251;
-    border:1px solid #4b1f0e;
+    font-size: 20PX;
+    color:white;
+    border:1px solid white;
     padding:10px 30px;
     border-radius: 50px;
-    margin-right: 45px;
+    margin-right: 20px;
     margin-left: 2px;
     cursor:pointer;
     transition:0.3s;
@@ -52,34 +58,91 @@
 }
 .navbar-button:hover{
     color:white;
-    background-color: #a47251;
+    background-color: #4b1f0e;
 
 }
 .navbar .active{
     padding-bottom:2px;
-    border-bottom:2px solid #4b1f0e;
+    border-bottom:2px solid white;
 
 }
 .navbar li{
     cursor: pointer;
+    color:white;
+
 
 }
-.cart-wrapper {
-    position: relative;
-    display: inline-block;
+.navbar-menu li {
+  color: white;
+  font-size: 20px;
+  padding: 8px 0;
+}
+.burger {
+  display: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: white;
+  z-index: 1100;
+}
 
+
+
+
+
+
+/* =========================
+   BURGER MOBILE
+   ========================= */
+@media (max-width: 768px) {
+
+    .burger {
+    display: block;
+    color: white;
+    position: relative;
+  }
+
+  .navbar-menu {
+    position: absolute;
+    top: 70px;
+    right: 0;
+
+    background: rgba(0,0,0,0.9);
+    width: 200px;
+
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+
+    padding: 20px;
+
+    display: none;
+  }
+
+  .navbar-menu.active-menu {
+    display: flex;
+  }
 
   
-}
+  .navbar-menu li {
+    color: white;
+    font-size: 16px; /* seulement dans menu mobile */
+  }
 
+  .navbar {
+    padding: 10px 20px;
+  }
 
-.cart-wrapper .dot {
-  position: absolute;
- top: 50px;
-  right: 50px;
-  height: 10px;
-  width: 10px;
-  background-color: red;
-  border-radius: 50%;
-  border: 2px solid white;
+  .navbar-button {
+    padding: 8px 15px;
+    font-size: 14px;
+  }
+  .navbar {
+    padding: 10px 15px;
+  }
+
+  .navbar-right {
+    margin-right: 10px;
+  }
+ 
+
 }

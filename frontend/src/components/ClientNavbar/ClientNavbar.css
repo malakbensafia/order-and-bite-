@@ -1,0 +1,100 @@
+.client-navbar {
+  position: absolute;  
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  height: 90px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+  background: transparent;
+
+}
+
+.client-navbar-left {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 150px;
+  object-fit: contain;
+}
+
+
+.client-navbar-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+   background: transparent;
+}
+
+.client-navbar-menu {
+  display: flex;
+  list-style: none;
+  gap: 40px;
+    background: transparent;
+}
+
+.client-navbar-menu li {
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 500;
+  padding-bottom: 3px;
+   color: white; 
+  background: transparent;
+}
+
+.client-navbar-menu .active {
+  border-bottom: 2px solid white;
+  color:white;
+}
+
+.client-navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+    background: transparent;
+}
+.navbar-cart {
+  background: url("../../assets/resto.jpg") center/cover no-repeat !important;
+}
+.iconcart {
+  width: 150px;
+  height: 150px;
+  cursor: pointer;
+  margin-right: -35px;
+}
+
+.iconbell {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.iconuser {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.icon-wrapper {
+  position: relative;
+}
+
+.cart-dot {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  height: 16px;
+  width: 16px;
+  background: red;
+  border-radius: 50%;
+  color: white;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

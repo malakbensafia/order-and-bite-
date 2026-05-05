@@ -1,0 +1,113 @@
+.espace-client {
+  display: flex;
+  flex-direction: column;
+}
+
+.client-hero {
+  background: url("../../assets/resto.jpg") center/cover no-repeat;
+  height: 80vh;
+  position: relative;
+  z-index: 1;
+   margin-top: -70px;
+}
+
+.client-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+}
+
+.client-hero-overlay h1 {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+.client-hero-overlay p {
+  opacity: 0.8;
+  font-size: 18px;
+}
+
+
+.client-dashboard {
+  padding: 30px;
+  position: relative;
+  z-index: 2;
+  margin-top: 0; 
+}
+@media (max-width: 768px) {
+
+  /* HERO */
+  .client-hero {
+    height: 45vh;
+  }
+
+  .client-hero-overlay h1 {
+    font-size: 24px;
+  }
+
+  .client-hero-overlay p {
+    font-size: 14px;
+  }
+
+  /* DASHBOARD */
+  .client-dashboard {
+    padding: 20px;
+  }
+
+  /* MAIN LAYOUT */
+  .client-container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  /* SIDEBAR -> HORIZONTAL */
+  .sidebar {
+    width: 100%;
+    display: flex;
+    overflow-x: auto;
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .sidebar h2 {
+    display: none;
+  }
+
+  .sidebar button {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+
+  /* CONTENT */
+  .content {
+    width: 100%;
+    padding: 20px;
+  }
+
+  /* FORM INPUT */
+  .add-box {
+    flex-direction: column;
+  }
+
+  .add-box input,
+  .add-box button {
+    width: 100%;
+  }
+
+  /* CARD */
+  .card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .delete {
+    align-self: flex-end;
+  }
+}

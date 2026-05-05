@@ -1,0 +1,188 @@
+/* PAGE */
+.reservation-page {
+  font-family: Arial, sans-serif;
+}
+
+/* HERO */
+.reservation-hero {
+  height: 80vh;
+  background: url("../../assets/resto.jpg") center/cover no-repeat;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+ 
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+}
+
+.hero-overlay h1 {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+.hero-overlay p {
+  opacity: 0.8;
+}
+
+/* BODY */
+.reservation-body {
+  padding: 40px;
+}
+
+/* ZONES */
+.zones-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+}
+
+.zone-card {
+  height: 220px;
+  border-radius: 16px;
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: 0.3s;
+}
+
+.zone-card:hover {
+  transform: scale(1.03);
+}
+
+.zone-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+
+.tables-section {
+  margin-top: 20px;
+}
+
+.back-btn {
+  padding: 10px 15px;
+  border: none;
+  background: #333;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.tables-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.table-card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+  text-align: center;
+}
+
+.status {
+  display: inline-block;
+  margin: 10px 0;
+  color: green;
+  font-weight: bold;
+}
+
+.reserve-btn {
+  padding: 10px 15px;
+  border: none;
+  background: #a47251;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* =========================
+   MOBILE ONLY
+========================= */
+@media (max-width: 768px) {
+
+  /* HERO */
+  .reservation-hero {
+    height: 45vh;
+  }
+
+  .hero-overlay h1 {
+    font-size: 22px;
+    padding: 0 10px;
+  }
+
+  .hero-overlay p {
+    font-size: 14px;
+    padding: 0 10px;
+  }
+
+  /* BODY */
+  .reservation-body {
+    padding: 15px;
+  }
+
+  /* ZONES */
+  .zones-grid {
+    grid-template-columns: 1fr; /* 1 colonne */
+    gap: 15px;
+  }
+
+  .zone-card {
+    height: 160px;
+  }
+
+  .zone-overlay h2 {
+    font-size: 18px;
+  }
+
+  /* TABLES */
+  .tables-grid {
+    grid-template-columns: 1fr; /* 1 colonne */
+    gap: 15px;
+  }
+
+  .table-card {
+    padding: 15px;
+    border-radius: 10px;
+  }
+
+  /* BUTTON BACK */
+  .back-btn {
+    width: 100%;
+    font-size: 14px;
+  }
+
+  /* RESERVE BUTTON */
+  .reserve-btn {
+    width: 100%;
+  }
+
+  /* TEXT ADAPTATION */
+  .tables-section h2 {
+    font-size: 18px;
+    text-align: center;
+  }
+}

@@ -1,0 +1,40 @@
+.livraison-page {
+  display: flex;
+  flex-direction: column;
+}
+
+/* HERO */
+.livraison-hero {
+  height: 80vh;
+  background: url("../../assets/resto.jpg") center/cover no-repeat;
+  position: relative;
+   margin-top: -70px;
+}
+
+.livraison-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+}
+
+.livraison-hero-overlay h1 {
+  font-size: 36px;
+}
+
+.livraison-hero-overlay p {
+    margin-top: 10px;
+  opacity: 0.8;
+  font-size: 18px;
+}
+
+/* CONTENT */
+.livraison-content {
+  padding: 40px;
+  background: #f1f5f9;
+}

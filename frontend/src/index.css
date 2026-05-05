@@ -12,14 +12,20 @@ a{
 
   
 }
-
-
-.app{
-  width:100%;
-  margin:auto;
-  min-height: 100vh;
-
+body {
+  background: transparent;
+  margin: 0;
+  padding: 0;
 }
+
+
+.app {
+  position: relative; /* 🔥 c'est tout ! */
+  width: 100%;
+  margin: auto;
+  min-height: 100vh;
+}
+
 @keyframes fadeIn{
   0%{
     opacity: 0;

@@ -1,66 +1,81 @@
-import React, { useState } from "react";
-import "./Modal.css";
+import React, { useState } from "react"
+import "./Modal.css"
+import { useNavigate } from "react-router-dom"
 
-const Modal = ({ setShowModal }) => {
-  const [step, setStep] = useState("mode");
+const Modal = ({ setShowModal, setShowLogin }) => {
+  const [step, setStep] = useState("mode")
+  const navigate = useNavigate()
+
+  // 🔥 check user connecté
+  const getUser = () => {
+    const user = localStorage.getItem("user")
+    return user ? JSON.parse(user) : null
+  }
+
+  const handleAction = (path) => {
+    const user = getUser()
+
+    // ❌ pas connecté → login
+    if (!user) {
+      setShowLogin(true)
+      setShowModal(false)
+      return
+    }
+
+    // ✅ connecté → navigation
+    navigate(path)
+    setShowModal(false)
+  }
 
   return (
     <div className="modal">
       <div className="modal-content">
 
-        {/* STEP 1 */}
         {step === "mode" && (
           <>
             <h3>Choisissez un mode</h3>
 
             <div className="btn-row">
-              <button>Livraison</button>
 
+              {/* LIVRAISON */}
+              <button onClick={() => handleAction('/livraison')}>
+                Livraison
+              </button>
+
+              {/* RESERVATION */}
               <button onClick={() => setStep("reservation")}>
                 Réservation
               </button>
+
             </div>
           </>
         )}
 
-        {/* STEP 2 */}
         {step === "reservation" && (
           <>
             <h3>Réservation</h3>
 
             <div className="btn-row">
-              <button onClick={() => setStep("with")}>
+
+              <button onClick={() => handleAction('/reservation')}>
                 Avec commande
               </button>
 
-              <button onClick={() => setStep("without")}>
+              <button onClick={() => handleAction('/reservation')}>
                 Sans commande
               </button>
+
             </div>
           </>
         )}
 
-        {/* STEP 3 - STOP (juste affichage) */}
-        {step === "with" && (
-          <>
-            <h3>Réservation avec commande</h3>
-          </>
-        )}
-
-        {step === "without" && (
-          <>
-            <h3>Réservation sans commande</h3>
-          </>
-        )}
-
-        {/* fermer */}
         <button className="close-btn" onClick={() => setShowModal(false)}>
           Fermer
         </button>
 
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Modal;
+export default Modal

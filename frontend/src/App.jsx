@@ -1,30 +1,117 @@
-import React from 'react'
-import Navbar from './components/Navbar/Navbar'
-import { Routes,Route } from 'react-router-dom'
-import Accueil from './pages/Accueil/Accueil'
-import FooterSection from './components/FooterSection/FooterSection'
-import Livraison from './pages/Livraison/Livraison'
+import React, { useState, useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
+
+import Accueil from "./pages/Accueil/Accueil";
+import Livraison from "./pages/Livraison/Livraison";
+import Cart from "./pages/Cart/Cart";
+import Reservation from "./pages/Reservation/Reservation";
+import Admin from "./pages/Admin/Admin";
+import EspaceClient from "./pages/EspaceClient/EspaceClient";
+import LoginPopup from "./components/LoginPopup/LoginPopup";
+
+import PublicLayout from "./layouts/PublicLayout";
+import ClientLayout from "./layouts/ClientLayout";
+import Livreur from "./pages/Livreur/Livreur";
+
 const App = () => {
+  const [showLogin, setShowLogin] = useState(false);
+
+  const [user, setUser] = useState(null);
+  const [role, setRole] = useState("");
+  const [roleFixed, setRoleFixed] = useState(false);
+  const [authMode, setAuthMode] = useState("S'inscrire");
+
+  useEffect(() => {
+    const saved = localStorage.getItem("user");
+    if (saved) {
+      setUser(JSON.parse(saved));
+    }
+  }, []);
+
   return (
     <>
-    <div className='app'>
-      <Navbar/>
-      
-      <Routes>
-        <Route path='/' element={<Accueil/>}/>
-        <Route path='/livraison' element={<Livraison/>}/>
-        
-      </Routes>
-       
-      
-    </div>
-    <FooterSection />
-    
-</>
-    
-    
- 
-  )
-}
+      {/* LOGIN POPUP */}
+      {showLogin && (
+        <LoginPopup
+          setShowLogin={setShowLogin}
+          role={role}
+          setRole={setRole}
+          roleFixed={roleFixed}
+          authMode={authMode}
+        />
+      )}
 
-export default App
+      <div className="app">
+
+        <Routes>
+
+          
+          <Route
+            path="/"
+            element={
+              <PublicLayout>
+                <Accueil
+                  setShowLogin={setShowLogin}
+                  setRole={setRole}
+                  setRoleFixed={setRoleFixed}
+                  setAuthMode={setAuthMode}
+                  user={user}
+                />
+              </PublicLayout>
+            }
+          />
+
+          <Route
+            path="/livraison"
+            element={
+              <ClientLayout transparent={true}>
+                <Livraison />
+              </ClientLayout>
+            }
+          />
+
+          <Route
+            path="/cart"
+            element={
+              <ClientLayout >
+                <Cart />
+              </ClientLayout>
+            }
+          />
+          <Route
+            path="/reservation"
+            element={
+              <ClientLayout hideCart={true} transparent={true}>
+                <Reservation />
+              </ClientLayout>
+            }
+          />
+
+          <Route
+            path="/client"
+            element={
+               <ClientLayout transparent={true}>
+                <EspaceClient />
+              </ClientLayout>
+            }
+          />
+          <Route path="/admin" element={
+            <ClientLayout transparent={true} hideCart={true}  > 
+               <Admin />
+            </ClientLayout>
+          } />
+          <Route path="/livreur" element={
+            <ClientLayout transparent={true} hideCart={true}  >
+              <Livreur/>
+
+            </ClientLayout>
+          }/>
+
+        </Routes>
+
+      </div>
+    </>
+  );
+};
+
+export default App;

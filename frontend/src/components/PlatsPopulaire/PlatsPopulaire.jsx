@@ -71,7 +71,7 @@ const PlatsPopulaire = () => {
               </div>
 
             </div>
-a
+
           </div>
         ))}
 

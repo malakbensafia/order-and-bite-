@@ -1,0 +1,9 @@
+@media (max-width: 768px) {
+  .accueil {
+    padding: 10px;
+  }
+
+  .accueil > * {
+    margin-bottom: 15px;
+  }
+}
