@@ -15,7 +15,7 @@ const Accueil = ({
 
   const [category, setCategory] = useState("Tout")
 
-  // 🔥 protection simple
+  
   const handleServicesClick = () => {
     if (!user) {
       setAuthMode("Se connecter")
@@ -23,7 +23,7 @@ const Accueil = ({
       return
     }
 
-    // sinon laisser Services gérer modal
+   
   }
 
   return (

@@ -14,6 +14,7 @@ import ClientLayout from "./layouts/ClientLayout";
 import Livreur from "./pages/Livreur/Livreur";
 import ResePrecommande from "./pages/ResePrecommande/ResePrecommande";
 
+
 const App = () => {
   const [showLogin, setShowLogin] = useState(false);
 
@@ -46,11 +47,16 @@ const App = () => {
 
         <Routes>
 
-          
+
           <Route
             path="/"
             element={
-              <PublicLayout>
+              <PublicLayout
+                setShowLogin={setShowLogin}
+                setRole={setRole}
+                setRoleFixed={setRoleFixed}
+                setAuthMode={setAuthMode}
+              >
                 <Accueil
                   setShowLogin={setShowLogin}
                   setRole={setRole}
@@ -91,21 +97,22 @@ const App = () => {
           <Route
             path="/client"
             element={
-               <ClientLayout transparent={true}>
+              <ClientLayout transparent={true}>
                 <EspaceClient />
               </ClientLayout>
             }
           />
           <Route path="/admin" element={
-            <ClientLayout transparent={true} hideCart={true}  > 
-               <Admin />
+            <ClientLayout transparent={true} hideCart={true}  >
+              <Admin />
             </ClientLayout>
           } />
           <Route path="/livreur" element={
             <ClientLayout transparent={true} hideCart={true}  >
-              <Livreur/>
+              <Livreur />
 
             </ClientLayout>
+
           }/>
           <Route path="/respre" element={
             <ClientLayout transparent={true} hideCart={true}>
@@ -114,6 +121,9 @@ const App = () => {
             </ClientLayout>
           }/>
           
+
+          
+
 
         </Routes>
 

@@ -1,9 +1,12 @@
 import './LoginPopup.css'
 import { assets } from '../../assets/assets'
-import supabase from '../../supabaseClient'
+import { loginUser, registerUser } from '../../api/auth'
 import React, { useState, useEffect } from 'react'
+import { useAuth } from "../../context/AuthContext"
 
 const LoginPopup = ({ setShowLogin, role, setRole, roleFixed, authMode }) => {
+
+  const { login } = useAuth()   // 🔥 AJOUT IMPORTANT
 
   const [currState, setCurrState] = useState("S'inscrire")
 
@@ -21,8 +24,6 @@ const LoginPopup = ({ setShowLogin, role, setRole, roleFixed, authMode }) => {
 
   const isAdmin = role === "admin"
 
-  // ---------------- VALIDATION ----------------
-
   const isValidName = (value) => /^[A-Za-zÀ-ÿ\s]{2,}$/.test(value)
 
   const isValidEmail = (value) =>
@@ -30,8 +31,6 @@ const LoginPopup = ({ setShowLogin, role, setRole, roleFixed, authMode }) => {
 
   const isStrongPassword = (value) =>
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/.test(value)
-
-  // ---------------- 🔥 PASSWORD STRENGTH ----------------
 
   const getPasswordStrength = (password) => {
     let score = 0
@@ -58,14 +57,11 @@ const LoginPopup = ({ setShowLogin, role, setRole, roleFixed, authMode }) => {
           ? "Presque bon : ajoute un symbole"
           : "Mot de passe sécurisé ✔"
 
-  // ---------------- CHANGE ----------------
-
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value })
   }
 
   // ---------------- SIGNUP ----------------
-
   const handleSubmit = async (e) => {
     e.preventDefault()
 
@@ -82,68 +78,36 @@ const LoginPopup = ({ setShowLogin, role, setRole, roleFixed, authMode }) => {
     if (!isValidEmail(form.email)) return alert("Email invalide")
     if (!isStrongPassword(form.password)) return alert("Mot de passe trop faible")
 
-    const { data: user, error } = await supabase
-      .from('utilisateur')
-      .insert([{
-        nom: form.nom,
-        prenom: form.prenom,
-        email: form.email,
-        telephone: cleanPhone,
-        motdepasse: form.password,
-        role: role
-      }])
-      .select()
-      .single()
+    try {
+      await registerUser(
+        { ...form, telephone: cleanPhone },
+        role
+      )
 
-    if (error) {
-      console.log(error)
+      alert("Compte créé ✔")
+      setCurrState("Se connecter")
+
+    } catch (err) {
+      console.log(err)
       alert("Erreur inscription")
-      return
     }
-
-    const id = user.idutilisateur
-
-    if (role === "client") {
-      await supabase.from('client').insert({
-        idutilisateur: id,
-        pointfidelite: 0
-      })
-    }
-
-    if (role === "livreur") {
-      await supabase.from('livreur').insert({
-        idutilisateur: id,
-        zonelivraison: "",
-        statutlivreur: "disponible",
-        latitudeliv: null,
-        longitudeliv: null
-      })
-    }
-
-    alert("Compte créé ✔")
-    setCurrState("Se connecter")
   }
 
   // ---------------- LOGIN ----------------
-
   const handleLogin = async (e) => {
     e.preventDefault()
 
-    const { data, error } = await supabase
-      .from('utilisateur')
-      .select('*')
-      .eq('email', form.email)
-      .eq('motdepasse', form.password)
-      .single()
+    try {
+      const user = await loginUser(form.email, form.password)
 
-    if (error || !data) {
-      alert("Login incorrect ❌")
-      return
+      login(user)   // 🔥 REMPLACE localStorage
+
+      alert("Connexion réussie ✔")
+      setShowLogin(false)
+
+    } catch (err) {
+      alert("Login incorrect")
     }
-
-    localStorage.setItem("user", JSON.stringify(data))
-    alert("Connexion réussie ✅")
-    setShowLogin(false)
   }
 
   return (
@@ -155,7 +119,15 @@ const LoginPopup = ({ setShowLogin, role, setRole, roleFixed, authMode }) => {
 
         <div className="login-popup-title">
           <h2>{isAdmin ? "Connexion Admin" : currState}</h2>
-          <img onClick={() => setShowLogin(false)} src={assets.close} alt="" />
+          <img
+            onClick={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
+              setShowLogin(false)
+            }}
+            src={assets.close}
+            alt=""
+          />
         </div>
 
         <div className="login-popup-inputs">
@@ -180,14 +152,9 @@ const LoginPopup = ({ setShowLogin, role, setRole, roleFixed, authMode }) => {
                       name="telephone"
                       value={form.telephone}
                       onChange={(e) => {
-                        let v = e.target.value.replace(/\D/g, "") // chiffres uniquement
-
-                        // limiter à 9 chiffres (Algérie mobile)
+                        let v = e.target.value.replace(/\D/g, "")
                         if (v.length > 9) v = v.slice(0, 9)
-
-                        // format : 54 33 21 22 3
                         v = v.replace(/(\d{2})(?=\d)/g, "$1 ").trim()
-
                         setForm({ ...form, telephone: v })
                       }}
                       placeholder="54 33 21 22 3"
@@ -203,7 +170,6 @@ const LoginPopup = ({ setShowLogin, role, setRole, roleFixed, authMode }) => {
                     required
                   />
 
-                  {/* 🔥 PASSWORD UI (REMISE COMME AVANT) */}
                   <div className="password-info">
                     <p className={`password-message ${strength}`}>
                       {passwordMessage}

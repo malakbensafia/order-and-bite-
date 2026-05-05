@@ -2,7 +2,7 @@ import supabase from "./supabaseClient"
 
 export async function testConnection() {
   const { data, error } = await supabase
-    .from("plat")   // mets une table qui existe
+    .from("plat")   
     .select("*")
 
   console.log("DATA =", data)

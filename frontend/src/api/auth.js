@@ -1,9 +1,24 @@
-import supabase from "../supabaseClient"
+import { supabase } from "./supabaseClient";
 
-// INSCRIPTION
-export const signUp = async (form, role) => {
+// LOGIN
+export const loginUser = async (email, password) => {
   const { data, error } = await supabase
     .from("utilisateur")
+    .select("*")
+    .eq("email", email)
+    .eq("motdepasse", password)
+    .single();
+
+  if (error) throw error;
+
+  return data;
+};
+
+// SIGNUP
+export const registerUser = async (form, role) => {
+
+  const { data: user, error } = await supabase
+    .from('utilisateur')
     .insert([{
       nom: form.nom,
       prenom: form.prenom,
@@ -13,24 +28,28 @@ export const signUp = async (form, role) => {
       role: role
     }])
     .select()
-    .single()
+    .single();
 
-  if (error) throw error
-  return data
-}
+  if (error) throw error;
 
-// CONNEXION
-export const login = async (email, password) => {
-  const { data, error } = await supabase
-    .from("utilisateur")
-    .select("*")
-    .eq("email", email)
-    .single()
+  const id = user.idutilisateur;
 
-  if (error || !data) throw new Error("Email incorrect")
+  if (role === "client") {
+    await supabase.from('client').insert({
+      idutilisateur: id,
+      pointfidelite: 0
+    });
+  }
 
-  if (data.motdepasse !== password)
-    throw new Error("Mot de passe incorrect")
+  if (role === "livreur") {
+    await supabase.from('livreur').insert({
+      idutilisateur: id,
+      zonelivraison: "",
+      statutlivreur: "disponible",
+      latitudeliv: null,
+      longitudeliv: null
+    });
+  }
 
-  return data
-}
+  return user;
+};

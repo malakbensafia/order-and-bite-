@@ -53,6 +53,7 @@ const Navbar = ({ setShowLogin, setRole, setRoleFixed, setAuthMode }) => {
 
                 <button
                     onClick={() => {
+                        console.log("click S'inscrire")
                         setRole("client")
                         setRoleFixed(false)
                         setAuthMode("S'inscrire")

@@ -11,7 +11,7 @@
   justify-content: center;
   align-items: center;
 
-  z-index: 1000;
+  z-index: 9999;
   backdrop-filter: blur(6px);
 
   animation: fadeBg 0.3s ease;
