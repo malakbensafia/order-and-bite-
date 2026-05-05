@@ -119,6 +119,185 @@
   cursor: pointer;
 }
 
+.form-resa-box {
+  margin-top: 30px;
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  max-width: 450px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.form-resa-box input, .form-resa-box select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+.form-resa-box button {
+  padding: 10px 20px;
+  margin-right: 10px;
+  background: #a47251;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.form-resa-box button:last-child {
+  background: #ccc;
+  color: #333;
+}
+
+/* =========================
+   CALENDRIER THEFORK
+========================= */
+.thefork-calendar {
+  background: white;
+  border-radius: 16px;
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid #eee;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.calendar-header button {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 5px 10px;
+}
+
+.calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-size: 12px;
+}
+
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+}
+
+.calendar-day {
+  text-align: center;
+  padding: 10px 5px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.calendar-day.available {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.calendar-day.available:hover {
+  background-color: #a3e4b7;
+}
+
+.calendar-day.unavailable {
+  background-color: #f8d7da;
+  color: #721c24;
+  cursor: not-allowed;
+}
+
+.calendar-day.selected {
+  background-color: #a47251;
+  color: white;
+}
+
+.calendar-day.other {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.calendar-legend {
+  display: flex;
+  gap: 20px;
+  margin-top: 15px;
+  font-size: 12px;
+}
+
+.legend-available {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #28a745;
+  margin-right: 5px;
+}
+
+.legend-unavailable {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #dc3545;
+  margin-right: 5px;
+}
+
+.heures-section {
+  margin-bottom: 15px;
+}
+
+.heures-section h4 {
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.heures-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.heure-item {
+  padding: 8px 16px;
+  border: 1px solid #ddd;
+  border-radius: 25px;
+  background: white;
+  cursor: pointer;
+}
+
+.heure-item.active {
+  background: #a47251;
+  color: white;
+  border-color: #a47251;
+}
+
+.info-text {
+  color: #999;
+  font-size: 13px;
+}
+
+/* BOUTONS DE NAVIGATION MOIS */
+.month-nav {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 5px 12px;
+  border-radius: 8px;
+}
+
+.month-nav:hover {
+  background: #f0f0f0;
+}
+
 /* =========================
    MOBILE ONLY
 ========================= */
@@ -146,7 +325,7 @@
 
   /* ZONES */
   .zones-grid {
-    grid-template-columns: 1fr; /* 1 colonne */
+    grid-template-columns: 1fr;
     gap: 15px;
   }
 
@@ -160,7 +339,7 @@
 
   /* TABLES */
   .tables-grid {
-    grid-template-columns: 1fr; /* 1 colonne */
+    grid-template-columns: 1fr;
     gap: 15px;
   }
 
@@ -185,4 +364,33 @@
     font-size: 18px;
     text-align: center;
   }
+
+  /* CALENDRIER MOBILE */
+  .calendar-days {
+    gap: 2px;
+  }
+
+  .calendar-day {
+    font-size: 12px;
+    padding: 6px 2px;
+  }
+
+  .heures-grid {
+    gap: 8px;
+  }
+
+  .heure-item {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+  .form-resa-box button:first-of-type {
+  background: #28a745;
+  color: white;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.form-resa-box button:first-of-type:hover {
+  background: #218838;
+}
 }

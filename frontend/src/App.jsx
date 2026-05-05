@@ -12,6 +12,7 @@ import LoginPopup from "./components/LoginPopup/LoginPopup";
 import PublicLayout from "./layouts/PublicLayout";
 import ClientLayout from "./layouts/ClientLayout";
 import Livreur from "./pages/Livreur/Livreur";
+import ResePrecommande from "./pages/ResePrecommande/ResePrecommande";
 
 const App = () => {
   const [showLogin, setShowLogin] = useState(false);
@@ -106,6 +107,13 @@ const App = () => {
 
             </ClientLayout>
           }/>
+          <Route path="/respre" element={
+            <ClientLayout transparent={true} hideCart={true}>
+              <ResePrecommande/>
+
+            </ClientLayout>
+          }/>
+          
 
         </Routes>
 
