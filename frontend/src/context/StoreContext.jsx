@@ -37,15 +37,19 @@ const StoreContextProvider = (props) => {
   // =========================
   // LOAD PLATS
   // =========================
+
+  // 1️⃣ Extraire en fonction nommée (remplace votre useEffect actuel)
+  const fetchPlats = async () => {
+    const { data, error } = await supabase
+      .from("plat")
+      .select(`*, promotionplat (idpromoplat, idplat, tauxreduction, datedebutpromo, datefinpromo)`);
+    if (!error) setPlats(data || []);
+  };
+
   useEffect(() => {
-    const fetchPlats = async () => {
-      const { data, error } = await supabase
-        .from("plat")
-        .select(`*, promotionplat (idpromoplat, idplat, tauxreduction, datedebutpromo, datefinpromo)`);
-      if (!error) setPlats(data || []);
-    };
     fetchPlats();
   }, []);
+
 
   // =========================
   // LOAD PANIER DEPUIS SUPABASE
@@ -208,7 +212,8 @@ const StoreContextProvider = (props) => {
     setModePanier, // 👈 IMPORTANT
     user,
     login,
-    logout
+    logout,
+     refreshPlats: fetchPlats
   };
 
   return (

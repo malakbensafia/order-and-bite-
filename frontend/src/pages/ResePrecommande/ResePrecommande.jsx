@@ -2,13 +2,13 @@ import React, { useState, useEffect, useContext } from "react";
 import "./ResePrecommande.css";
 import supabase from "../../api/supabaseClient";
 import { zones } from "../../assets/assets";
-import { StoreContext } from '../../context/StoreContext'; // 👈 AJOUTE
+import { StoreContext } from '../../context/StoreContext'; 
 
 const ResePrecommande = () => {
-  const { setModePanier } = useContext(StoreContext); // 👈 AJOUTE
+  const { setModePanier } = useContext(StoreContext); 
 
   useEffect(() => {
-    setModePanier("precommande"); // 👈 AJOUTE
+    setModePanier("precommande"); 
   }, []);
 
   const [zone, setZone] = useState(null);

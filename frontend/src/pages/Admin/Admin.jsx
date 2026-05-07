@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react"; // 👈 useContext ajouté
 import "./Admin.css";
 
 import PlatsPage from "../../components/PlatsPage/PlatsPage";
-import CategoryList from "../../components/CategoryList/CategoryList";
 
 import {
     FaStore, FaChartBar, FaBox, FaHamburger, FaUsers,
@@ -11,22 +10,22 @@ import {
 } from "react-icons/fa";
 
 import { supabase } from "../../api/supabaseClient";
+import { StoreContext } from "../../context/StoreContext"; // 👈 AJOUTÉ
 
 const Admin = () => {
+
+    const { refreshPlats } = useContext(StoreContext); // 👈 AJOUTÉ
 
     const [page, setPage] = useState("profil");
     const [open, setOpen] = useState(false);
 
-    // PROMOTIONS STATES
+    // 🔥 PROMOTIONS STATES
     const [plats, setPlats] = useState([]);
     const [selectedPlats, setSelectedPlats] = useState([]);
     const [taux, setTaux] = useState(20);
     const [debut, setDebut] = useState("");
     const [fin, setFin] = useState("");
     const [promotions, setPromotions] = useState([]);
-
-    // CATEGORY STATE
-    const [category, setCategory] = useState("Tout");
 
     const menu = [
         { key: "profil", label: "Profil", icon: <FaStore /> },
@@ -41,7 +40,7 @@ const Admin = () => {
         { key: "paiements", label: "Paiements", icon: <FaCreditCard /> },
     ];
 
-    // CHARGER PLATS
+    // 🔥 CHARGER PLATS
     useEffect(() => {
         const fetchPlats = async () => {
             const { data } = await supabase.from("plat").select("*");
@@ -50,7 +49,7 @@ const Admin = () => {
         fetchPlats();
     }, []);
 
-    // CHARGER PROMOTIONS
+    // 🔥 CHARGER PROMOTIONS
     useEffect(() => {
         const fetchPromotions = async () => {
             const { data } = await supabase
@@ -61,12 +60,7 @@ const Admin = () => {
         fetchPromotions();
     }, []);
 
-    // RESET SELECTION SI CATEGORY CHANGE
-    useEffect(() => {
-        setSelectedPlats([]);
-    }, [category]);
-
-    // SELECT PLATS
+    // 🔥 SELECT PLATS
     const togglePlat = (id) => {
         setSelectedPlats((prev) =>
             prev.includes(id)
@@ -75,7 +69,7 @@ const Admin = () => {
         );
     };
 
-    // SUPPRIMER PROMOTION
+    // 🔥 SUPPRIMER PROMO
     const supprimerPromo = async (idpromoplat) => {
         await supabase
             .from("promotionplat")
@@ -83,14 +77,25 @@ const Admin = () => {
             .eq("idpromoplat", idpromoplat);
 
         setPromotions(prev => prev.filter(p => p.idpromoplat !== idpromoplat));
+        await refreshPlats(); // 👈 AJOUTÉ
     };
 
-    // CREATE PROMO
+    // 🔥 CREATE PROMO
     const appliquerPromo = async () => {
+        if (!debut || !fin) {
+            alert("Veuillez remplir les deux dates !");
+            return;
+        }
 
-        if (!debut || !fin) return alert("Remplir les dates !");
-        if (new Date(debut) >= new Date(fin)) return alert("Dates invalides !");
-        if (selectedPlats.length === 0) return alert("Sélectionner des plats !");
+        if (new Date(debut) >= new Date(fin)) {
+            alert("La date de début doit être inférieure à la date de fin !");
+            return;
+        }
+
+        if (selectedPlats.length === 0) {
+            alert("Veuillez sélectionner au moins un plat !");
+            return;
+        }
 
         for (let idplat of selectedPlats) {
             const { data } = await supabase
@@ -111,13 +116,8 @@ const Admin = () => {
 
         alert("Promotion ajoutée !");
         setSelectedPlats([]);
+        await refreshPlats(); // 👈 AJOUTÉ
     };
-
-    // FILTRAGE PLATS
-    const platsFiltres =
-        category === "Tout"
-            ? plats
-            : plats.filter(p => p.categorie === category); // ⚠️ adapte si besoin
 
     return (
         <div className="admin-page">
@@ -182,12 +182,9 @@ const Admin = () => {
                     {/* PROMOTIONS */}
                     {page === "promotions" && (
                         <div className="promotions-container">
-
                             <h2>Gestion des promotions</h2>
 
-                            {/* FORMULAIRE */}
                             <div className="promo-form">
-
                                 <div className="promo-form-row">
                                     <label>Taux de réduction</label>
                                     <select
@@ -227,17 +224,9 @@ const Admin = () => {
 
                             <hr />
 
-                            {/* CATEGORIES */}
-                            <CategoryList
-                                category={category}
-                                setCategory={setCategory}
-                            />
-
                             <h3>Choisir les plats</h3>
-
-                            {/* PLATS FILTRÉS */}
                             <div className="promo-plats-grid">
-                                {platsFiltres.map((p) => (
+                                {plats.map((p) => (
                                     <div
                                         key={p.idplat}
                                         onClick={() => togglePlat(p.idplat)}
@@ -250,18 +239,16 @@ const Admin = () => {
 
                             <hr />
 
-                            {/* PROMOTIONS */}
                             <h3>Promotions actives</h3>
-
                             <div className="promo-list">
                                 {promotions.length === 0 && <p>Aucune promotion</p>}
-
                                 {promotions.map((promo) => (
                                     <div key={promo.idpromoplat} className="promo-item">
-                                        <span>{promo.plat?.nomplat}</span>
-                                        <span>{promo.tauxreduction}%</span>
-                                        <span>{promo.datedebutpromo} → {promo.datefinpromo}</span>
-
+                                        <span className="promo-plat-name">{promo.plat?.nomplat}</span>
+                                        <span className="promo-taux">{promo.tauxreduction}%</span>
+                                        <span className="promo-dates">
+                                            {promo.datedebutpromo} → {promo.datefinpromo}
+                                        </span>
                                         <button
                                             className="promo-delete-btn"
                                             onClick={() => supprimerPromo(promo.idpromoplat)}
@@ -271,7 +258,6 @@ const Admin = () => {
                                     </div>
                                 ))}
                             </div>
-
                         </div>
                     )}
 
