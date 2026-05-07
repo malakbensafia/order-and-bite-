@@ -9,7 +9,13 @@ const ClientNavbar = () => {
     const [menu, setMenu] = useState("Livraison");
     const navigate = useNavigate();
     const location = useLocation(); // 🔥 détecte la page Aactuelle
-    const { getTotalItems } = useContext(StoreContext);
+    const context = useContext(StoreContext);
+
+    if (!context) {
+        return null; 
+    }
+
+    const { getTotalItems } = context;
     const { logout, user } = useAuth()
     console.log("USER =", user)
     const isClient = user?.role === "client"
@@ -43,7 +49,7 @@ const ClientNavbar = () => {
         }
     }
 
-    // 🔥 pages où la navbar doit avoir un fond coloré
+    //  pages où la navbar doit avoir un fond coloré
     const isCartPage = location.pathname === "/cart";
 
     return (
@@ -108,7 +114,7 @@ const ClientNavbar = () => {
                         <img src={assets.cart} alt="cart" className="iconcart" />
 
                         {getTotalItems() > 0 && (
-                            <span className="cart-dot">{getTotalItems()}</span>
+                             <span className="cart-dot"></span>
                         )}
                     </div>
                 )}

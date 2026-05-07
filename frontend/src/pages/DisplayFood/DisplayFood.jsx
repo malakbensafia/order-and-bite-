@@ -7,25 +7,39 @@ import { imagesMap } from '../../assets/assets'
 const DisplayFood = ({ category }) => {
 
   const [plats, setPlats] = useState([])
-  console.log("PLATS 👉", plats)
-  console.log("CATEGORY 👉", category)
 
   useEffect(() => {
+
     const fetchPlats = async () => {
+
       const { data, error } = await supabase
         .from("plat")
-        .select("*")
+        .select(`
+          *,
+          promotionplat (
+            idpromoplat,
+            idplat,
+            tauxreduction,
+            datedebutpromo,
+            datefinpromo
+          )
+        `);
 
-      if (!error) {
-        setPlats(data || [])
+      if (error) {
+        console.error("Erreur chargement plats :", error)
+        return
       }
+
+      setPlats(data || [])
     }
 
     fetchPlats()
+
   }, [])
 
   return (
     <div className='food-display' id='food-display'>
+
       <h2>Nos plats</h2>
 
       <div className="food-display-list">
@@ -37,28 +51,20 @@ const DisplayFood = ({ category }) => {
           )
           .map((item) => {
 
-            // 🔥 IMAGE DIRECTE (PAS assets)
-            const imageUrl = `/images/${item.image_name}`
-            console.log("ITEM 👉", item)
-            console.log("categorie DB 👉", item.categorie)
-            console.log("image_name 👉", item.image_name)
             return (
               <FoodItem
                 key={item.idplat}
                 id={item.idplat}
                 name={item.nomplat}
                 description={item.description}
-                price={item.prix}
-                image={
-                  item.image_name?.startsWith("http")
-                    ? item.image_name   // 🔥 image URL (admin)
-                    : imagesMap[item.image_name] // 🔥 image locale
-                }
+                image={imagesMap[item.image_name]}
+                item={item}
               />
             )
           })}
 
       </div>
+
     </div>
   )
 }
