@@ -1,10 +1,11 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import './FoodItem.css'
 import StarRating from '../StarRating/StarRating'
 import { assets } from '../../assets/assets'
 import { StoreContext } from '../../context/StoreContext'
 import { FaPlus } from "react-icons/fa";
 import { getImageSrc } from "../../outils/getImageSrc";
+import { useAuth } from "../../context/AuthContext";
 
 import {
   getFinalPrice,
@@ -12,23 +13,33 @@ import {
   getPromoBadgeImage
 } from "../../outils/promotion";
 
+import {
+  addAvis,
+  updateMoyennePlat,
+  getMoyennePlat
+} from "../../api/avisApi";
+
+import supabase from "../../api/supabaseClient";
+
 const FoodItem = ({ id, name, description, image, item }) => {
 
   const [showMore, setShowMore] = useState(false)
+  const [moyenne, setMoyenne] = useState(0)
+  const [avisList, setAvisList] = useState([])
+
   const { cartItems, addToCart, removeFromCart } = useContext(StoreContext)
+
+  const { user } = useAuth()
 
   if (!item) return null;
 
-
   const itemId = String(id);
-
 
   const promo = item?.promotionplat?.[0] || null;
   const active = promo && isPromoActive(promo);
   const badge = active ? getPromoBadgeImage(promo) : null;
 
   const finalPrice = getFinalPrice(item);
-
 
   const LIMIT = 80;
   const safeDesc = description || "";
@@ -41,15 +52,81 @@ const FoodItem = ({ id, name, description, image, item }) => {
   // CART
   const quantity = cartItems[itemId] ?? 0;
 
+  // LOAD MOYENNE + AVIS
+  useEffect(() => {
+
+    const fetchData = async () => {
+
+      // moyenne
+      const moy = await getMoyennePlat(itemId)
+      setMoyenne(moy)
+
+      // avis
+      const { data } = await supabase
+        .from("avis")
+        .select("*")
+        .eq("idplat", itemId)
+        .order("dateavis", { ascending: false })
+
+      setAvisList(data || [])
+    }
+
+    fetchData()
+
+  }, [itemId])
+
+  // AJOUT AVIS
+  const handleRate = async (value) => {
+
+    if (!user) {
+      alert("Veuillez vous connecter")
+      return
+    }
+
+    const commentaire = prompt("Votre commentaire")
+
+    const avis = await addAvis({
+      note: value,
+      commentaire: commentaire || "",
+      dateavis: new Date(),
+      idclient: user.idutilisateur,
+      idplat: itemId
+    })
+
+    if (!avis) {
+      alert("Erreur ajout avis")
+      return
+    }
+
+    // recalcul moyenne
+    await updateMoyennePlat(itemId)
+
+    // refresh moyenne
+    const moy = await getMoyennePlat(itemId)
+    setMoyenne(moy)
+
+    // refresh avis
+    const { data } = await supabase
+      .from("avis")
+      .select("*")
+      .eq("idplat", itemId)
+      .order("dateavis", { ascending: false })
+
+    setAvisList(data || [])
+
+    alert("Avis ajouté ✅")
+  }
+
   return (
     <div className='food-item'>
 
       <div className="food-item-img-container">
-        <img
-  className='food-item-image'
-  src={image}
-/>
 
+        <img
+          className='food-item-image'
+          src={getImageSrc(item.image_name)}
+          alt={name}
+        />
 
         {/* BADGE PROMO */}
         {active && badge && (
@@ -119,7 +196,47 @@ const FoodItem = ({ id, name, description, image, item }) => {
             <p className="food-item-price">{item.prix} DA</p>
           )}
 
-          <StarRating onRate={(value) => console.log(itemId, value)} />
+          <div>
+
+            <StarRating onRate={handleRate} />
+
+            <p style={{ marginTop: "5px" }}>
+              ⭐ {moyenne}/5
+            </p>
+
+          </div>
+
+        </div>
+
+        {/* COMMENTAIRES */}
+        <div className="avis-section">
+
+          {avisList.map((avis) => (
+
+            <div
+              key={avis.idavis}
+              style={{
+                marginTop: "10px",
+                padding: "8px",
+                borderTop: "1px solid #ddd"
+              }}
+            >
+
+              <p>
+                ⭐ {avis.note}/5
+              </p>
+
+              <p>
+                {avis.commentaire}
+              </p>
+
+              <small>
+                Client : {avis.idclient}
+              </small>
+
+            </div>
+
+          ))}
 
         </div>
 
