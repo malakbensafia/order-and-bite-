@@ -1,0 +1,103 @@
+.avis-section {
+  margin-top: 12px;
+  border-top: 1px solid #eee;
+  padding-top: 10px;
+}
+
+.avis-moyenne {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.avis-toggle-btn {
+  background: #ff6b35;
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+
+.avis-toggle-btn:hover {
+  background: #e55a25;
+}
+
+.avis-form {
+  background: #f9f9f9;
+  border-radius: 10px;
+  padding: 12px;
+  margin-bottom: 10px;
+}
+
+.avis-note-selected {
+  font-size: 13px;
+  color: #666;
+  margin: 6px 0;
+}
+
+.avis-textarea {
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 8px;
+  font-size: 13px;
+  resize: none;
+  margin-top: 6px;
+  box-sizing: border-box;
+}
+
+.avis-submit-btn {
+  margin-top: 8px;
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 7px 18px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.avis-submit-btn:hover {
+  background: #218838;
+}
+
+.avis-list {
+  margin-top: 10px;
+}
+
+.avis-item {
+  border-top: 1px solid #eee;
+  padding: 8px 0;
+}
+
+.avis-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.avis-note {
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.avis-date {
+  font-size: 12px;
+  color: #999;
+}
+
+.avis-commentaire {
+  font-size: 13px;
+  color: #444;
+  margin: 0;
+}
+
+.avis-empty {
+  font-size: 13px;
+  color: #999;
+  font-style: italic;
+}

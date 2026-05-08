@@ -114,7 +114,7 @@ const { data: existing } = await supabase
     .eq("ville", ville);
 
 if (existing && existing.length > 0) {
-    alert("⚠️ Cette adresse existe déjà !");
+    alert(" Cette adresse existe déjà !");
     return;
 }
             // Sauvegarder dans Supabase

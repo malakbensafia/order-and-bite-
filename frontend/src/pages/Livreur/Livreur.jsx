@@ -79,13 +79,13 @@ const Livreur = () => {
 
                     {page === "livrees" && (
                         <div>
-                            <h2>✅ Livrées</h2>
+                            <h2> Livrées</h2>
                         </div>
                     )}
 
                     {page === "revenus" && (
                         <div>
-                            <h2>💰 Revenus</h2>
+                            <h2> Revenus</h2>
                         </div>
                     )}
 

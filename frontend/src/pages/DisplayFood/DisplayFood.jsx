@@ -51,8 +51,8 @@ const DisplayFood = ({ category }) => {
           )
           .map((item) => {
 
-            const key = item.image_name?.replace(/\r/g, '').trim()
-
+            const key = item.image_name?.replace(/[\r\n\t]/g, '').trim()
+            
             const image =
               !key
                 ? null

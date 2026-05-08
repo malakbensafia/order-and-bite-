@@ -1,17 +1,16 @@
-
 .client-container {
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
+  margin-top: 30px;
 }
-
 
 .sidebar {
-  width: 220px;
-  background-color: #3E2C23;
-  color: white;
-  padding: 20px;
+  width: 260px;
+  flex-shrink: 0;
+  height: 100vh;
+  position: sticky;
+  top: 0;
 }
-
 .sidebar h2 {
   margin-bottom: 20px;
 }

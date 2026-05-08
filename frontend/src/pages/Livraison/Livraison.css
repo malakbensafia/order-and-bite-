@@ -38,3 +38,28 @@
   padding: 40px;
   background: #f1f5f9;
 }
+
+.livraison-avis {
+  padding: 40px;
+  background: #fff;
+}
+
+.livraison-avis h2 {
+  font-size: 24px;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #ff6b35;
+  padding-bottom: 10px;
+}
+
+.avis-plat-block {
+  margin-bottom: 30px;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 12px;
+}
+
+.avis-plat-block h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #333;
+}
