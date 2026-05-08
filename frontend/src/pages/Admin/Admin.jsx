@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react"; // 👈 useContext ajouté
 import "./Admin.css";
-
+import ClientsPage from "../../components/ClientsPage/ClientsPage";
+import LivreursPage from "../../components/LivreursPage/LivreursPage";
 import PlatsPage from "../../components/PlatsPage/PlatsPage";
 
 import {
@@ -176,8 +177,8 @@ const Admin = () => {
 
                     {page === "commandes" && <h2>Commandes</h2>}
                     {page === "plats" && <PlatsPage />}
-                    {page === "clients" && <h2>Clients</h2>}
-                    {page === "livreurs" && <h2>Livreurs</h2>}
+                    {page === "clients" && <ClientsPage />}
+                    {page === "livreurs" && <LivreursPage />}
 
                     {/* PROMOTIONS */}
                     {page === "promotions" && (

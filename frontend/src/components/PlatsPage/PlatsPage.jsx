@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import supabase from "../../api/supabaseClient";
 import { deletePlat, updatePlat } from "../../api/platApi";
 import AddPlatForm from "../AddPlatForm/AddPlatForm";
+import "./PlatsPage.css";
 
 const categories = [
   "Burger",
@@ -70,23 +71,21 @@ const PlatsPage = () => {
   };
 
   return (
-    <div>
+    <div className="plats-page">
 
       <h2>Gestion des plats</h2>
 
-      <AddPlatForm onSuccess={() => fetchPlats(activeCat)} />
+      <div className="add-form">
+        <AddPlatForm onSuccess={() => fetchPlats(activeCat)} />
+      </div>
 
       {/* CATEGORIES */}
-      <div>
+      <div className="categories">
         {categories.map(cat => (
           <button
             key={cat}
             onClick={() => setActiveCat(cat)}
-            style={{
-              margin: 5,
-              background: activeCat === cat ? "black" : "#eee",
-              color: activeCat === cat ? "white" : "black"
-            }}
+            className={activeCat === cat ? "active" : ""}
           >
             {cat}
           </button>
@@ -94,43 +93,76 @@ const PlatsPage = () => {
       </div>
 
       {/* LISTE */}
-      {plats.map(p => (
-        <div key={p.idplat} style={{ borderBottom: "1px solid #ddd", padding: 10 }}>
+      <div className="plats-list">
 
-          <p><b>{p.nomplat}</b> - {p.prix} DA</p>
+        {plats.map(p => (
+          <div key={p.idplat} className="plat-card">
 
-          {!p.disponibilite && (
-            <p style={{ color: "red" }}>
-              ❌ Plat non disponible
-            </p>
-          )}
+            <p><b>{p.nomplat}</b> - {p.prix} DA</p>
 
-          <button onClick={() => startEdit(p)}>Modifier</button>
-          <button onClick={() => handleDelete(p.idplat)}>Supprimer</button>
+            {!p.disponibilite && (
+              <p style={{ color: "red" }}>
+                ❌ Plat non disponible
+              </p>
+            )}
 
-          {editId === p.idplat && (
-            <div>
-
-              <input name="nomplat" value={form.nomplat || ""} onChange={handleChange} />
-              <input name="description" value={form.description || ""} onChange={handleChange} />
-              <input name="prix" value={form.prix || ""} onChange={handleChange} />
-
-              <select
-                name="disponibilite"
-                value={String(form.disponibilite)}
-                onChange={handleChange}
+            <div className="plat-actions">
+              <button
+                className="btn-edit"
+                onClick={() => startEdit(p)}
               >
-                <option value="true">Disponible</option>
-                <option value="false">Non disponible</option>
-              </select>
+                Modifier
+              </button>
 
-              <button onClick={handleUpdate}>Save</button>
-
+              <button
+                className="btn-delete"
+                onClick={() => handleDelete(p.idplat)}
+              >
+                Supprimer
+              </button>
             </div>
-          )}
 
-        </div>
-      ))}
+            {editId === p.idplat && (
+              <div className="edit-box">
+
+                <input
+                  name="nomplat"
+                  value={form.nomplat || ""}
+                  onChange={handleChange}
+                />
+
+                <input
+                  name="description"
+                  value={form.description || ""}
+                  onChange={handleChange}
+                />
+
+                <input
+                  name="prix"
+                  value={form.prix || ""}
+                  onChange={handleChange}
+                />
+
+                <select
+                  name="disponibilite"
+                  value={String(form.disponibilite)}
+                  onChange={handleChange}
+                >
+                  <option value="true">Disponible</option>
+                  <option value="false">Non disponible</option>
+                </select>
+
+                <button onClick={handleUpdate}>
+                  Save
+                </button>
+
+              </div>
+            )}
+
+          </div>
+        ))}
+
+      </div>
 
     </div>
   );

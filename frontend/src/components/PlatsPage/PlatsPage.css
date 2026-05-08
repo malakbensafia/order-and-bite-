@@ -1,0 +1,236 @@
+.plats-page{
+    min-height:100vh;
+    background-image: url("../../assets/resto.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    padding: 30px;
+    color: white;
+}
+
+/* overlay plus pro (dégradé comme Uber Eats) */
+.plats-page::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.75),
+        rgba(0,0,0,0.85)
+    );
+    z-index:1;
+}
+
+.plats-page > *{
+    position:relative;
+    z-index:2;
+}
+
+/* TITRE STYLE APP */
+.plats-page h2{
+    font-size:28px;
+    font-weight:700;
+    margin-bottom:25px;
+    letter-spacing:0.5px;
+}
+
+/* ========================= */
+/* CATEGORIES FIX PRO UBER EATS */
+/* ========================= */
+
+.categories{
+    display:flex;
+    flex-direction:row;
+    flex-wrap:nowrap;          /* ❌ empêche retour ligne */
+    gap:10px;
+
+    overflow-x:auto;           /* ✅ scroll horizontal */
+    overflow-y:hidden;
+
+    padding:10px 0;
+    margin-bottom:20px;
+
+    scrollbar-width:none;
+    -webkit-overflow-scrolling:touch;
+}
+
+/* hide scrollbar chrome */
+.categories::-webkit-scrollbar{
+    display:none;
+}
+
+.categories button{
+    flex:0 0 auto;
+    white-space:nowrap;
+
+    padding:10px 16px;
+    border-radius:999px;
+    border:1px solid rgba(255,255,255,0.2);
+    background:rgba(255,255,255,0.08);
+    color:white;
+
+    cursor:pointer;
+    transition:0.25s;
+    font-weight:500;
+
+    scroll-snap-align:start;
+}
+
+.categories button:hover{
+    background:rgba(255,255,255,0.18);
+    transform:translateY(-2px);
+}
+
+.categories .active{
+    background:#ff6b00;
+    border:none;
+    color:white;
+}
+
+/* GRID MODERNE */
+.plats-list{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap:20px;
+}
+
+/* CARD STYLE UBER EATS */
+.plat-card{
+    background:rgba(255,255,255,0.06);
+    backdrop-filter: blur(16px);
+
+    border:1px solid rgba(255,255,255,0.12);
+    border-radius:18px;
+
+    padding:18px;
+
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+
+    transition:0.3s;
+}
+
+.plat-card:hover{
+    transform:translateY(-6px);
+    background:rgba(255,255,255,0.10);
+}
+
+/* TITRE PLAT */
+.plat-card b{
+    font-size:18px;
+}
+
+/* PRIX */
+.plat-card p{
+    margin:0;
+    color:#eaeaea;
+}
+
+/* ACTIONS */
+.plat-actions{
+    display:flex;
+    gap:10px;
+    margin-top:10px;
+}
+
+.plat-actions button{
+    flex:1;
+    padding:9px;
+    border-radius:10px;
+    border:none;
+    cursor:pointer;
+    font-weight:600;
+}
+
+.btn-edit{
+    background:#219ebc;
+    color:white;
+}
+
+.btn-delete{
+    background:#d00000;
+    color:white;
+}
+
+/* EDIT FORM PRO */
+.edit-box{
+    margin-top:10px;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.edit-box input,
+.edit-box select{
+    padding:10px;
+    border-radius:10px;
+    border:none;
+    outline:none;
+}
+
+/* bouton save */
+.edit-box button{
+    background:#ff6b00;
+    color:white;
+    padding:10px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:600;
+}
+
+/* FORM ADD spacing */
+.add-form{
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 25px;
+}
+
+.add-form form{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.add-form label{
+    margin:10px 0 5px;
+    font-weight:600;
+    color:#fff;
+}
+
+.add-form input,
+.add-form select{
+    width:100%;
+    padding:12px 14px;
+    border-radius:10px;
+    border:none;
+    font-size:15px;
+
+    background:rgba(255,255,255,0.9);
+    color:#000;
+}
+
+.add-form button{
+    margin-top:15px;
+    width:100%;
+    padding:12px;
+
+    border:none;
+    border-radius:10px;
+    background:#ff6b00;
+    color:white;
+
+    font-weight:600;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.add-form button:hover{
+    background:#ff7f1a;
+    transform: translateY(-2px);
+}
