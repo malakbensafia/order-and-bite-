@@ -1,0 +1,160 @@
+.paiements-page { padding: 10px 0; }
+
+.paiements-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1a1210;
+    margin-bottom: 24px;
+    border-left: 3px solid #3E2C23;
+    padding-left: 14px;
+}
+
+.paiements-empty {
+    color: #aaa;
+    font-size: 14px;
+    padding: 20px 0;
+}
+
+/* STATS */
+.paiements-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-bottom: 24px;
+}
+
+.stat-card {
+    background: white;
+    border: 1px solid #e8e0d8;
+    border-radius: 12px;
+    padding: 16px 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.stat-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: #aaa;
+    margin-bottom: 6px;
+}
+
+.stat-value {
+    font-size: 22px;
+    font-weight: 700;
+    color: #3E2C23;
+}
+
+/* FILTRES */
+.paiements-filtres {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.filtre-btn {
+    padding: 6px 18px;
+    border: 1px solid #e8e0d8;
+    border-radius: 100px;
+    background: white;
+    color: #666;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.filtre-btn:hover { border-color: #3E2C23; color: #3E2C23; }
+.filtre-btn.active { background: #3E2C23; color: white; border-color: #3E2C23; }
+
+/* LISTE */
+.paiements-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.paiement-card {
+    background: white;
+    border: 1px solid #e8e0d8;
+    border-radius: 14px;
+    padding: 18px 22px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+    transition: box-shadow 0.2s;
+}
+
+.paiement-card:hover {
+    box-shadow: 0 6px 20px rgba(62,44,35,0.1);
+}
+
+.paiement-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+    gap: 12px;
+}
+
+.paiement-id {
+    font-weight: 700;
+    font-size: 15px;
+    color: #1a1210;
+    margin-right: 10px;
+}
+
+.paiement-type {
+    font-size: 12px;
+    padding: 3px 10px;
+    border-radius: 100px;
+    font-weight: 600;
+}
+
+.paiement-type.livraison {
+    background: #d1ecf1;
+    color: #0c5460;
+}
+
+.paiement-type.reservation {
+    background: #e2d9f3;
+    color: #4a1d96;
+}
+
+.paiement-body {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.paiement-section { min-width: 130px; }
+
+.section-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: #aaa;
+    margin-bottom: 4px;
+}
+
+.paiement-section p {
+    font-size: 13px;
+    color: #444;
+    margin: 0;
+}
+
+.paiement-montant {
+    font-weight: 700;
+    font-size: 15px !important;
+    color: #3E2C23 !important;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .paiements-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .paiement-body {
+        flex-direction: column;
+        gap: 12px;
+    }
+}

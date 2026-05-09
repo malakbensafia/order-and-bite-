@@ -1,0 +1,127 @@
+.commandes-livreur {
+  padding: 10px 0;
+}
+
+.commandes-livreur-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1a1210;
+  margin-bottom: 24px;
+  border-left: 3px solid #3E2C23;
+  padding-left: 14px;
+}
+
+.commandes-livreur-empty {
+  color: #aaa;
+  font-size: 14px;
+  padding: 20px 0;
+}
+
+.commandes-livreur-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.commande-livreur-card {
+  background: white;
+  border: 1px solid #e8e0d8;
+  border-radius: 14px;
+  padding: 20px 24px;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+  transition: box-shadow 0.2s;
+}
+
+.commande-livreur-card:hover {
+  box-shadow: 0 6px 20px rgba(62,44,35,0.1);
+}
+
+.commande-livreur-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.commande-livreur-id {
+  font-weight: 700;
+  font-size: 15px;
+  color: #1a1210;
+  margin-right: 12px;
+}
+
+.commande-livreur-date {
+  font-size: 12px;
+  color: #aaa;
+}
+
+.commande-livreur-client {
+  font-size: 13px;
+  color: #444;
+  margin-bottom: 12px;
+}
+
+.commande-livreur-plats {
+  background: #f5f0eb;
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-bottom: 14px;
+}
+
+.commande-livreur-plats p {
+  font-size: 13px;
+  color: #444;
+  padding: 2px 0;
+  margin: 0;
+}
+
+.commande-livreur-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 12px;
+  border-top: 1px solid #f0ebe5;
+}
+
+.commande-livreur-total {
+  font-weight: 700;
+  font-size: 14px;
+  color: #1a1210;
+}
+
+.btn-accepter-livreur {
+  padding: 9px 20px;
+  background: #2d6a4f;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-accepter-livreur:hover {
+  background: #1b5e20;
+}
+
+.commande-livreur-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-refuser-livreur {
+    padding: 9px 20px;
+    background: #c0392b;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-refuser-livreur:hover {
+    background: #a93226;
+}

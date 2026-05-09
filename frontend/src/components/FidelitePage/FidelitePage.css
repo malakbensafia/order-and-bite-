@@ -1,0 +1,202 @@
+.fidelite-page {
+    padding: 10px 0;
+}
+
+.fidelite-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1a1210;
+    margin-bottom: 24px;
+    border-left: 3px solid #3E2C23;
+    padding-left: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.fidelite-regles {
+    background: #fff8f0;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.fidelite-regles h3 {
+    font-size: 16px;
+    margin-bottom: 16px;
+    color: #3E2C23;
+}
+
+.regles-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.regle-card {
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.regle-icon {
+    font-size: 24px;
+}
+
+.regle-card p {
+    font-size: 13px;
+    color: #666;
+    margin: 6px 0 4px 0;
+}
+
+.regle-card strong {
+    font-size: 15px;
+    color: #3E2C23;
+}
+
+.fidelite-subtitle {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 20px 0 14px 0;
+    color: #1a1210;
+}
+
+.fidelite-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.fidelite-empty {
+    color: #aaa;
+    font-style: italic;
+}
+
+.fidelite-card {
+    background: white;
+    border: 1px solid #e8e0d8;
+    border-radius: 12px;
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.fidelite-card-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.fidelite-rank {
+    font-size: 18px;
+    font-weight: 700;
+    color: #3E2C23;
+    min-width: 30px;
+}
+
+.fidelite-user-icon {
+    color: #aaa;
+    font-size: 20px;
+}
+
+.fidelite-nom {
+    font-weight: 600;
+    font-size: 14px;
+    margin: 0;
+    color: #1a1210;
+}
+
+.fidelite-email {
+    color: #aaa;
+    font-size: 12px;
+}
+
+.fidelite-card-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.fidelite-points {
+    font-weight: 700;
+    font-size: 15px;
+    color: #3E2C23;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.btn-historique {
+    background: #3E2C23;
+    color: white;
+    border: none;
+    padding: 7px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn-historique:hover {
+    background: #5a3f30;
+}
+
+/* MODAL */
+.historique-points-total {
+    font-size: 14px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.historique-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 400px;
+    overflow-y: auto;
+    margin-bottom: 16px;
+}
+
+.historique-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 14px;
+    background: #f9f9f9;
+    border-radius: 8px;
+}
+
+.historique-type {
+    font-size: 13px;
+    font-weight: 600;
+    margin: 0 0 4px 0;
+    color: #333;
+}
+
+.historique-date {
+    font-size: 11px;
+    color: #aaa;
+}
+
+.historique-valeur {
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.positif { color: #2d6a4f; }
+.negatif { color: #c0392b; }
+
+.historique-empty {
+    color: #aaa;
+    font-style: italic;
+    text-align: center;
+    padding: 20px;
+}

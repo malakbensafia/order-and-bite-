@@ -1,0 +1,280 @@
+.commandes-page {
+  padding: 10px 0;
+}
+
+.commandes-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1a1210;
+  margin-bottom: 24px;
+  border-left: 3px solid #3E2C23;
+  padding-left: 14px;
+}
+
+.commandes-empty {
+  color: #aaa;
+  font-size: 14px;
+  padding: 20px 0;
+}
+
+.commandes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* CARTE COMMANDE */
+.commande-card {
+  background: white;
+  border: 1px solid #e8e0d8;
+  border-radius: 14px;
+  padding: 20px 24px;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+  transition: box-shadow 0.2s;
+}
+
+.commande-card:hover {
+  box-shadow: 0 6px 20px rgba(62,44,35,0.1);
+}
+
+.commande-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.commande-id {
+  font-weight: 700;
+  font-size: 15px;
+  color: #1a1210;
+  margin-right: 12px;
+}
+
+.commande-date {
+  font-size: 12px;
+  color: #aaa;
+}
+
+.commande-section {
+  margin-bottom: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: #aaa;
+  margin-bottom: 5px;
+}
+
+.commande-plat-line {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #444;
+  padding: 2px 0;
+}
+
+.commande-plat-prix {
+  font-weight: 600;
+  color: #3E2C23;
+}
+
+.commande-footer {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  align-items: center;
+  padding-top: 12px;
+  border-top: 1px solid #f0ebe5;
+  margin-bottom: 14px;
+}
+
+.commande-total {
+  font-weight: 700;
+  font-size: 14px;
+  color: #1a1210;
+}
+
+.commande-paiement,
+.commande-livraison-statut {
+  font-size: 12px;
+  color: #888;
+  background: #f5f0eb;
+  padding: 3px 10px;
+  border-radius: 100px;
+}
+
+/* ACTIONS */
+.commande-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn-accepter {
+  padding: 9px 20px;
+  background: #2d6a4f;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-accepter:hover { background: #1b5e20; }
+
+.btn-refuser {
+  padding: 9px 20px;
+  background: #c0392b;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-refuser:hover { background: #a93226; }
+
+.btn-livreurs {
+  padding: 9px 20px;
+  background: #3E2C23;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-livreurs:hover { background: #5a3f30; }
+
+/* MODAL */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-box {
+  background: white;
+  border-radius: 16px;
+  padding: 28px;
+  width: 500px;
+  max-width: 95vw;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+}
+
+.modal-box h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a1210;
+  margin-bottom: 18px;
+}
+
+.btn-notif-all {
+  width: 100%;
+  padding: 12px;
+  background: #3E2C23;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-bottom: 14px;
+}
+
+.btn-notif-all:hover { background: #5a3f30; }
+
+.modal-ou {
+  text-align: center;
+  color: #aaa;
+  font-size: 12px;
+  margin-bottom: 14px;
+}
+
+.livreurs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.livreur-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1px solid #e8e0d8;
+}
+
+.livreur-row.dispo { border-color: #c3e6cb; background: #f8fff9; }
+.livreur-row.indispo { opacity: 0.5; background: #fafafa; }
+
+.livreur-nom {
+  font-weight: 600;
+  font-size: 14px;
+  color: #1a1210;
+  margin: 0;
+}
+
+.livreur-zone {
+  font-size: 12px;
+  color: #aaa;
+  margin: 2px 0 0 0;
+}
+
+.livreur-badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 100px;
+}
+
+.badge-dispo { background: #d4edda; color: #155724; }
+.badge-indispo { background: #f8d7da; color: #721c24; }
+
+.btn-assigner {
+  padding: 7px 16px;
+  background: #3E2C23;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-assigner:hover { background: #5a3f30; }
+
+.btn-fermer {
+  width: 100%;
+  padding: 10px;
+  background: #f5f0eb;
+  color: #3E2C23;
+  border: 1px solid #e0d4c8;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-fermer:hover { background: #ede5db; }

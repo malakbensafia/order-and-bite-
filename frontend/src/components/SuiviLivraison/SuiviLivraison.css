@@ -1,0 +1,199 @@
+.suivi-page {
+  padding: 24px;
+  max-width: 800px;
+}
+
+.suivi-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1a1210;
+  margin-bottom: 20px;
+  border-left: 3px solid #3E2C23;
+  padding-left: 14px;
+}
+
+/* INFO BAR */
+.suivi-info-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  background: #f5f0eb;
+  border-radius: 12px;
+  padding: 14px 18px;
+  margin-bottom: 28px;
+}
+
+.suivi-cmd-id {
+  font-weight: 700;
+  font-size: 15px;
+  color: #1a1210;
+}
+
+.suivi-total {
+  font-size: 13px;
+  color: #888;
+  background: white;
+  padding: 3px 12px;
+  border-radius: 100px;
+  border: 1px solid #e0d4c8;
+}
+
+.suivi-temps {
+  font-size: 13px;
+  color: #3E2C23;
+  background: #fff3e0;
+  padding: 4px 14px;
+  border-radius: 100px;
+  border: 1px solid #f0c98a;
+  margin-left: auto;
+}
+
+/* STEPPER */
+.suivi-stepper {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  margin-bottom: 28px;
+  gap: 0;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+.suivi-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  min-width: 80px;
+  opacity: 0.35;
+  transition: opacity 0.3s;
+}
+
+.suivi-step.done,
+.suivi-step.active {
+  opacity: 1;
+}
+
+.suivi-step-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #e8e0d8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  border: 2px solid #e8e0d8;
+  transition: all 0.3s;
+}
+
+.suivi-step.done .suivi-step-icon {
+  background: #3E2C23;
+  border-color: #3E2C23;
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.suivi-step.active .suivi-step-icon {
+  background: white;
+  border-color: #3E2C23;
+  border-width: 2.5px;
+  box-shadow: 0 0 0 4px rgba(62,44,35,0.1);
+  font-size: 20px;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 4px rgba(62,44,35,0.1); }
+  50%       { box-shadow: 0 0 0 8px rgba(62,44,35,0.05); }
+}
+
+.suivi-step-label {
+  font-size: 11px;
+  color: #5a4a3a;
+  text-align: center;
+  font-weight: 500;
+  line-height: 1.3;
+  margin: 0;
+}
+
+.suivi-step.active .suivi-step-label {
+  color: #3E2C23;
+  font-weight: 700;
+}
+
+/* LIGNE ENTRE ÉTAPES */
+.suivi-step-line {
+  flex: 1;
+  height: 2px;
+  background: #e8e0d8;
+  margin-top: 21px;
+  min-width: 20px;
+  transition: background 0.3s;
+}
+
+.suivi-step-line.done {
+  background: #3E2C23;
+}
+
+/* CARTE */
+.suivi-map {
+  border-radius: 14px;
+  border: 1px solid #e0d4c8;
+  display: block;
+}
+
+.suivi-map-placeholder {
+  height: 200px;
+  border-radius: 14px;
+  background: #f5f0eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #aaa;
+  font-size: 14px;
+  border: 1px solid #e0d4c8;
+}
+
+.suivi-map-note {
+  margin-top: 8px;
+  font-size: 11px;
+  color: #bbb;
+  text-align: center;
+}
+
+/* LIVRÉE */
+.suivi-livree {
+  text-align: center;
+  padding: 40px 20px;
+  background: #f0faf4;
+  border-radius: 16px;
+  border: 1px solid #c3e6cb;
+}
+
+.suivi-livree-icon {
+  font-size: 3rem;
+  margin-bottom: 12px;
+}
+
+.suivi-livree h3 {
+  font-size: 1.3rem;
+  color: #1b5e20;
+  margin-bottom: 8px;
+}
+
+.suivi-livree p {
+  color: #4a7a52;
+  font-size: 14px;
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+  .suivi-page { padding: 16px; }
+  .suivi-step { min-width: 60px; }
+  .suivi-step-icon { width: 36px; height: 36px; font-size: 15px; }
+  .suivi-step-label { font-size: 10px; }
+  .suivi-step-line { min-width: 10px; }
+}

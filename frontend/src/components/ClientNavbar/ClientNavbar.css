@@ -114,3 +114,19 @@
   color: white ;
   transform: scale(1.1);
 }
+.bell-dot {
+  position: absolute;
+  top: -5px;
+  right: 10px;
+  height: 8px;
+  width: 8px;
+  background: red;
+  border-radius: 50%;
+  color: white;
+  font-size: 10px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1001;
+}

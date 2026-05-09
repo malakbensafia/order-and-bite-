@@ -3,34 +3,21 @@ import './FoodItem.css'
 import StarRating from '../StarRating/StarRating'
 import { assets } from '../../assets/assets'
 import { StoreContext } from '../../context/StoreContext'
-import { FaPlus } from "react-icons/fa";
+import { FaPlus,FaStar } from "react-icons/fa";
 import { getImageSrc } from "../../outils/getImageSrc";
-import { useAuth } from "../../context/AuthContext";
 import { getFinalPrice, isPromoActive, getPromoBadgeImage } from "../../outils/promotion";
-import { addAvis, updateMoyennePlat, getMoyennePlat } from "../../api/avisApi";
-import supabase from "../../api/supabaseClient";
+import { getMoyennePlat } from "../../api/avisApi";
 
-const FoodItem = ({ id, name, description, image, item }) => {
+
+const FoodItem = ({ id, name, description, image, item, onSelectPlat }) => {
 
   const [showMore, setShowMore] = useState(false)
-  const [moyenne, setMoyenne] = useState(0)
-  const [avisList, setAvisList] = useState([])
+  const [moyenne, setMoyenne] = useState(item?.moyenne || 0)
   const { cartItems, addToCart, removeFromCart } = useContext(StoreContext)
-  const { user } = useAuth()
 
   useEffect(() => {
-    const fetchData = async () => {
-      const moy = await getMoyennePlat(id)
-      setMoyenne(moy)
-      const { data } = await supabase
-        .from("avis")
-        .select("*")
-        .eq("idplat", id)
-        .order("dateavis", { ascending: false })
-      setAvisList(data || [])
-    }
-    fetchData()
-  }, [id])
+    setMoyenne(item?.moyenne || 0)
+  }, [item?.moyenne])
 
   if (!item) return null;
 
@@ -49,27 +36,15 @@ const FoodItem = ({ id, name, description, image, item }) => {
 
   const quantity = cartItems[itemId] ?? 0;
 
-  const handleRate = async (value) => {
-    if (!user) { alert("Veuillez vous connecter"); return; }
-    const commentaire = prompt("Votre commentaire")
-    const avis = await addAvis({
-      note: value,
-      commentaire: commentaire || "",
-      dateavis: new Date(),
-      idclient: user.idutilisateur,
-      idplat: itemId
-    })
-    if (!avis) { alert("Erreur ajout avis"); return; }
-    await updateMoyennePlat(itemId)
-    const moy = await getMoyennePlat(itemId)
-    setMoyenne(moy)
-    const { data } = await supabase
-      .from("avis")
-      .select("*")
-      .eq("idplat", itemId)
-      .order("dateavis", { ascending: false })
-    setAvisList(data || [])
-    alert("Avis ajouté ✅")
+  // 👇 CLIQUE SUR RATING → envoie le plat sélectionné + scroll
+  const handleClickRating = () => {
+    if (onSelectPlat) {
+      onSelectPlat({ id: itemId, nom: name })
+      setTimeout(() => {
+        const el = document.getElementById("section-commentaires")
+        if (el) el.scrollIntoView({ behavior: "smooth" })
+      }, 100)
+    }
   }
 
   return (
@@ -115,22 +90,19 @@ const FoodItem = ({ id, name, description, image, item }) => {
             <p className="food-item-price">{item.prix} DA</p>
           )}
 
-          <div>
-            <StarRating onRate={handleRate} />
-            <p style={{ marginTop: "5px" }}>⭐ {moyenne}/5</p>
+          {/*  RATING LECTURE SEULE — cliquable */}
+          <div
+            onClick={handleClickRating}
+            style={{ cursor: "pointer" }}
+            title="Laisser un avis"
+          >
+            <StarRating value={Math.round(moyenne)} />
+            <p style={{ marginTop: "5px", fontSize: "12px", textAlign: "center" }}>
+              <FaStar color="#f5a623" /> {Number(moyenne).toFixed(1)}/5
+            </p>
           </div>
-        </div>
 
-        <div className="avis-section">
-          {avisList.map((avis) => (
-            <div key={avis.idavis} style={{ marginTop: "10px", padding: "8px", borderTop: "1px solid #ddd" }}>
-              <p>⭐ {avis.note}/5</p>
-              <p>{avis.commentaire}</p>
-              <small>Client : {avis.idclient}</small>
-            </div>
-          ))}
         </div>
-
       </div>
     </div>
   )

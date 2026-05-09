@@ -1,17 +1,29 @@
-
 import CategoryList from '../../components/CategoryList/CategoryList'
 import DisplayFood from '../DisplayFood/DisplayFood'
+import AvisSection from '../../components/AvisSection/AvisSection'
 import { StoreContext } from '../../context/StoreContext'
 import './Livraison.css'
 import React, { useState, useEffect, useContext } from 'react'
+import { FaComments } from "react-icons/fa"; // 👈
+
 const Livraison = () => {
 
   const [category, setCategory] = useState("Tout")
-  const { cartItems, getTotalCartAmount, setModePanier } = useContext(StoreContext)
+  const [platSelectionne, setPlatSelectionne] = useState(() => {
+    const saved = localStorage.getItem("platSelectionne")
+    return saved ? JSON.parse(saved) : null
+  })
+
+  const { setModePanier } = useContext(StoreContext)
 
   useEffect(() => {
-    setModePanier("livraison"); // 👈 AJOUTE ÇA
+    setModePanier("livraison");
   }, []);
+
+  const handleSelectPlat = (plat) => {
+    setPlatSelectionne(plat)
+    localStorage.setItem("platSelectionne", JSON.stringify(plat))
+  }
 
   return (
     <div className="livraison-page">
@@ -21,24 +33,17 @@ const Livraison = () => {
       </div>
 
       <div className="livraison-content">
-
-        <CategoryList
-          category={category}
-          setCategory={setCategory}
-        />
-
-        {/* 🔥 UNE SEULE SOURCE */}
-        <DisplayFood category={category} />
-
-        <div className="livraison-cart">
-         
-
-         
-
-         
-        </div>
-
+        <CategoryList category={category} setCategory={setCategory} />
+        <DisplayFood category={category} onSelectPlat={handleSelectPlat} />
+        <div className="livraison-cart"></div>
       </div>
+
+      {/* SECTION COMMENTAIRES EN BAS */}
+      <div id="section-commentaires" className="livraison-avis">
+        <h2><FaComments /> Commentaires</h2> 
+        <AvisSection idplat={platSelectionne?.id || null} />
+      </div>
+
     </div>
   )
 }

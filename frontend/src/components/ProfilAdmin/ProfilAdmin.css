@@ -1,0 +1,144 @@
+.profil-admin-page {
+    padding: 10px 0;
+}
+
+/* CARTE PROFIL */
+.profil-admin-card {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    background: white;
+    border: 1px solid #e8e0d8;
+    border-radius: 16px;
+    padding: 28px 32px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    margin-bottom: 32px;
+}
+
+.profil-admin-avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: #3E2C23;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 28px;
+    flex-shrink: 0;
+}
+
+.profil-admin-info h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1a1210;
+    margin-bottom: 4px;
+}
+
+.profil-admin-role {
+    display: inline-block;
+    background: #f5ede8;
+    color: #3E2C23;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    padding: 3px 12px;
+    border-radius: 100px;
+    margin-bottom: 14px;
+}
+
+.profil-admin-details {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.profil-detail-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #666;
+}
+
+.profil-detail-row svg {
+    color: #3E2C23;
+    flex-shrink: 0;
+}
+
+/* STATS */
+.profil-admin-stats-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1a1210;
+    margin-bottom: 16px;
+    border-left: 3px solid #3E2C23;
+    padding-left: 12px;
+}
+
+.profil-admin-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 14px;
+}
+
+.profil-stat-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: white;
+    border: 1px solid #e8e0d8;
+    border-radius: 14px;
+    padding: 18px 20px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    transition: box-shadow 0.2s;
+}
+
+.profil-stat-card:hover {
+    box-shadow: 0 6px 20px rgba(62,44,35,0.1);
+}
+
+.profil-stat-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+.profil-stat-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #aaa;
+    margin-bottom: 4px;
+}
+
+.profil-stat-value {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1a1210;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .profil-admin-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .profil-admin-details {
+        align-items: center;
+    }
+
+    .profil-admin-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

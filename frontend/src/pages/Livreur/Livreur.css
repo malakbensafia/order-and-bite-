@@ -90,73 +90,11 @@
   background: #22c55e;
 }
 
-/* MAP */
-.map-box {
-  margin-top: 15px;
-  padding: 15px;
-  background: #f3f4f6;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.profil-livreur-container {
-  position: relative;
-  min-height: 600px;
-  background: url("../../assets/resto.jpg") center/cover no-repeat;
-  border-radius: 16px;
-  overflow: hidden;
-}
 
-/* overlay sombre */
-.profil-livreur-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.65);
-  padding: 40px;
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-}
 
-/* header */
-.profil-header h2 {
-  color: white;
-  font-size: 28px;
-}
 
-.profil-header p {
-  color: rgba(255,255,255,0.7);
-}
 
-/* cards grid */
-.profil-cards {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-}
 
-/* glass cards */
-.profil-card {
-  background: rgba(255,255,255,0.12);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255,255,255,0.2);
-  border-radius: 14px;
-  padding: 20px;
-  color: white;
-  transition: 0.3s;
-}
-
-.profil-card:hover {
-  transform: translateY(-5px);
-  background: rgba(255,255,255,0.18);
-}
-
-/* status special */
-.profil-card.status p {
-  color: #22c55e;
-  font-weight: bold;
-}
 /* ===================== TOGGLE ===================== */
 .toggle-btn {
   display: none;

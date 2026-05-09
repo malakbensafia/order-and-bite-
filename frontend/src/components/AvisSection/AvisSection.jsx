@@ -1,35 +1,33 @@
 import React, { useState, useEffect } from 'react'
 import './AvisSection.css'
 import StarRating from '../StarRating/StarRating'
+import { FaUser, FaUtensils, FaStar, FaCalendar } from "react-icons/fa";
 import { useAuth } from "../../context/AuthContext";
-import { addAvis, updateMoyennePlat, getMoyennePlat } from "../../api/avisApi";
+import { addAvis, updateMoyennePlat } from "../../api/avisApi";
 import supabase from "../../api/supabaseClient";
+import { ajouterPoints } from "../../api/fideliteApi";
 
 const AvisSection = ({ idplat }) => {
 
-  const [moyenne, setMoyenne] = useState(0)
-  const [avisList, setAvisList] = useState([])
+  const [tousLesAvis, setTousLesAvis] = useState([])
   const [commentaire, setCommentaire] = useState("")
   const [noteSelectionnee, setNoteSelectionnee] = useState(0)
   const [showForm, setShowForm] = useState(false)
   const { user } = useAuth()
 
-  // CHARGER AVIS + MOYENNE
+  // CHARGER TOUS LES AVIS
+  const fetchTousLesAvis = async () => {
+    const { data } = await supabase
+      .from("avis")
+      .select(`*, client(utilisateur(prenom)), plat(nomplat)`)
+      .order("dateavis", { ascending: false })
+
+    setTousLesAvis(data || [])
+  }
+
   useEffect(() => {
-    const fetchData = async () => {
-      const moy = await getMoyennePlat(idplat)
-      setMoyenne(moy)
-
-      const { data } = await supabase
-        .from("avis")
-        .select("*")
-        .eq("idplat", idplat)
-        .order("dateavis", { ascending: false })
-
-      setAvisList(data || [])
-    }
-    fetchData()
-  }, [idplat])
+    fetchTousLesAvis()
+  }, [])
 
   // SOUMETTRE AVIS
   const handleSubmit = async () => {
@@ -48,69 +46,70 @@ const AvisSection = ({ idplat }) => {
     if (!avis) { alert("Erreur ajout avis"); return; }
 
     await updateMoyennePlat(idplat)
-    const moy = await getMoyennePlat(idplat)
-    setMoyenne(moy)
+    await fetchTousLesAvis()
+    if (user?.idutilisateur) {
+    await ajouterPoints(user.idutilisateur, 20, "avis_laisse");
+}
 
-    const { data } = await supabase
-      .from("avis")
-      .select("*")
-      .eq("idplat", idplat)
-      .order("dateavis", { ascending: false })
-
-    setAvisList(data || [])
     setCommentaire("")
     setNoteSelectionnee(0)
     setShowForm(false)
-    alert("Avis ajouté ✅")
+    alert("Avis ajouté ")
   }
 
   return (
     <div className="avis-section">
 
-      {/* MOYENNE */}
-      <div className="avis-moyenne">
-        ⭐ {moyenne}/5 ({avisList.length} avis)
-      </div>
-
       {/* BOUTON LAISSER UN AVIS */}
-      <button
-        className="avis-toggle-btn"
-        onClick={() => setShowForm(!showForm)}
-      >
-        {showForm ? "Annuler" : "✍️ Laisser un avis"}
-      </button>
-
-      {/* FORMULAIRE AVIS */}
-      {showForm && (
-        <div className="avis-form">
-          <StarRating onRate={(val) => setNoteSelectionnee(val)} />
-          <p className="avis-note-selected">
-            {noteSelectionnee > 0 ? `Note : ${noteSelectionnee}/5` : "Choisissez une note"}
-          </p>
-          <textarea
-            className="avis-textarea"
-            placeholder="Votre commentaire..."
-            value={commentaire}
-            onChange={(e) => setCommentaire(e.target.value)}
-            rows={3}
-          />
-          <button className="avis-submit-btn" onClick={handleSubmit}>
-            Envoyer
+      {idplat && (
+        <>
+          <button
+            className="avis-toggle-btn"
+            onClick={() => setShowForm(!showForm)}
+          >
+            {showForm ? "Annuler" : " Laisser un avis"}
           </button>
-        </div>
+
+          {showForm && (
+            <div className="avis-form">
+              <StarRating onRate={(val) => setNoteSelectionnee(val)} />
+              <p className="avis-note-selected">
+                {noteSelectionnee > 0 ? `Note : ${noteSelectionnee}/5` : "Choisissez une note"}
+              </p>
+              <textarea
+                className="avis-textarea"
+                placeholder="Votre commentaire..."
+                value={commentaire}
+                onChange={(e) => setCommentaire(e.target.value)}
+                rows={3}
+              />
+              <button className="avis-submit-btn" onClick={handleSubmit}>
+                Envoyer
+              </button>
+            </div>
+          )}
+        </>
       )}
 
-      {/* LISTE AVIS */}
+      {/* TOUS LES AVIS */}
       <div className="avis-list">
-        {avisList.length === 0 && (
-          <p className="avis-empty">Aucun avis pour ce plat</p>
+        {tousLesAvis.length === 0 && (
+          <p className="avis-empty">Aucun commentaire pour le moment</p>
         )}
-        {avisList.map((avis) => (
+        {tousLesAvis.map((avis) => (
           <div key={avis.idavis} className="avis-item">
             <div className="avis-header">
-              <span className="avis-note">⭐ {avis.note}/5</span>
+              <span className="avis-nom">
+                <FaUser /> {avis.client?.utilisateur?.prenom || "Anonyme"}
+              </span>
+              <span className="avis-plat-nom">
+                <FaUtensils /> {avis.plat?.nomplat}
+              </span>
+              <span className="avis-note">
+                <StarRating value={avis.note} />
+              </span>
               <span className="avis-date">
-                {new Date(avis.dateavis).toLocaleDateString("fr-FR")}
+                <FaCalendar /> {new Date(avis.dateavis).toLocaleDateString("fr-FR")}
               </span>
             </div>
             <p className="avis-commentaire">{avis.commentaire}</p>

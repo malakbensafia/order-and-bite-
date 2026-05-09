@@ -1,0 +1,82 @@
+.resa-client-page { padding: 10px 0; }
+
+.resa-client-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1a1210;
+    margin-bottom: 24px;
+    border-left: 3px solid #3E2C23;
+    padding-left: 14px;
+}
+
+.resa-client-empty {
+    color: #aaa;
+    font-size: 14px;
+    padding: 20px 0;
+}
+
+.resa-client-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.resa-client-card {
+    background: white;
+    border: 1px solid #e8e0d8;
+    border-radius: 14px;
+    padding: 18px 22px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+    transition: box-shadow 0.2s;
+}
+
+.resa-client-card:hover {
+    box-shadow: 0 6px 20px rgba(62,44,35,0.1);
+}
+
+.resa-client-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+    gap: 12px;
+}
+
+.resa-client-table {
+    font-weight: 700;
+    font-size: 15px;
+    color: #1a1210;
+    display: block;
+    margin-bottom: 3px;
+}
+
+.resa-client-capacite {
+    font-size: 12px;
+    color: #aaa;
+}
+
+.resa-client-info {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-size: 13px;
+    color: #555;
+    margin-bottom: 14px;
+}
+
+.resa-client-annuler {
+    padding: 8px 18px;
+    background: white;
+    border: 1px solid #e74c3c;
+    color: #e74c3c;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.resa-client-annuler:hover {
+    background: #e74c3c;
+    color: white;
+}

@@ -1,225 +1,226 @@
-.clients-page{
-      min-height:100vh;
-    background-image: url("../../assets/resto.jpg"); 
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    position:relative;
-    padding:20px;
+.clients-page {
+    min-height: 100vh;
+    background: #f1f5f9;
+    padding: 20px;
 }
 
-.clients-header{
-    display:flex;
-    justify-content:space-between;
-    margin-bottom:25px;
+.clients-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    align-items: center;
 }
 
-.clients-header input{
-    padding:10px;
-    border-radius:10px;
-    border:none;
-    width:250px;
+.clients-header h2 {
+    margin: 0;
 }
 
-.clients-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:20px;
+.clients-header input {
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    width: 250px;
+    background: white;
 }
 
-.client-card{
-    background:rgba(255,255,255,0.06);
-    backdrop-filter:blur(12px);
-    border-radius:18px;
-    padding:20px;
-    cursor:pointer;
-    transition:0.3s;
+.clients-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
 }
 
-.client-card:hover{
-    transform:translateY(-5px);
+.client-card {
+    background: white;
+    border-radius: 18px;
+    padding: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    color: #333;
 }
 
-.avatar{
-    width:60px;
-    height:60px;
-    border-radius:50%;
-    background:#ff6b00;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    margin-bottom:10px;
-    font-size:22px;
+.client-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.12);
 }
 
-.fidelite{
-    margin-top:10px;
-    background:#ffb703;
-    color:black;
-    padding:8px;
-    border-radius:10px;
-    font-weight:bold;
+.avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #3E2C23;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    font-size: 22px;
+    color: white;
+}
+
+.client-card h3 {
+    margin: 0 0 8px 0;
+    font-size: 16px;
+    color: #222;
+}
+
+.client-card p {
+    color: #666;
+    font-size: 13px;
+    margin: 4px 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.fidelite {
+    margin-top: 10px;
+    background: #fff7e6;
+    color: #b45309;
+    padding: 8px;
+    border-radius: 10px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
 }
 
 /* MODAL */
-.modal-overlay{
-    position:fixed;
-    top:0;
-    left:0;
-    right:0;
-    bottom:0;
-    background:rgba(0,0,0,0.7);
-    display:flex;
-    justify-content:center;
-    align-items:center;
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
 }
 
-.modal{
-    background:#1e1e1e;
-    padding:30px;
-    border-radius:15px;
-    width:300px;
-    color:white;
-    text-align:center;
+.modal {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    width: 320px;
+    color: #333;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.15);
 }
 
-.modal button{
-    margin-top:15px;
-    padding:10px;
-    border:none;
-    border-radius:10px;
-    background:#ff6b00;
-    color:white;
-    cursor:pointer;
-}
-.admin-actions{
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-    margin-top:20px;
+.modal h2 {
+    margin-bottom: 15px;
+    font-size: 20px;
 }
 
-.btn-danger{
-    background:#d00000;
-    color:white;
-    border:none;
-    padding:10px;
-    border-radius:10px;
-    cursor:pointer;
+.modal p {
+    color: #555;
+    margin: 6px 0;
+    font-size: 14px;
 }
 
-.btn-warning{
-    background:#ffb703;
-    color:black;
-    border:none;
-    padding:10px;
-    border-radius:10px;
-    cursor:pointer;
+.admin-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
 }
 
-.btn-close{
-    background:#333;
-    color:white;
-    border:none;
-    padding:10px;
-    border-radius:10px;
-    cursor:pointer;
+.btn-danger {
+    background: #d00000;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
 }
-/* =========================
-   TABLETTE LARGE
-========================= */
-@media (max-width: 1200px){
 
-    .clients-grid,
-    .livreurs-grid{
+.btn-danger:hover {
+    background: #b00000;
+}
+
+.btn-warning {
+    background: #ffb703;
+    color: black;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.btn-warning:hover {
+    background: #e6a500;
+}
+
+.btn-close {
+    background: #eee;
+    color: #333;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.btn-close:hover {
+    background: #ddd;
+}
+
+/* ========================= TABLETTE LARGE ========================= */
+@media (max-width: 1200px) {
+    .clients-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
-
-/* =========================
-   TABLETTE
-========================= */
-@media (max-width: 1000px){
-
-    .clients-grid,
-    .livreurs-grid{
+/* ========================= TABLETTE ========================= */
+@media (max-width: 1000px) {
+    .clients-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 15px;
     }
 
-    .client-card,
-    .livreur-card{
+    .client-card {
         padding: 15px;
         min-height: 180px;
     }
 
-    .clients-header{
+    .clients-header {
         flex-direction: column;
         gap: 10px;
         align-items: flex-start;
     }
 
-    .clients-header input{
+    .clients-header input {
         width: 100%;
     }
 }
 
-
-/* =========================
-   MOBILE
-========================= */
-@media (max-width: 600px){
-
-    .clients-grid,
-    .livreurs-grid{
+/* ========================= MOBILE ========================= */
+@media (max-width: 600px) {
+    .clients-grid {
         grid-template-columns: 1fr;
         gap: 15px;
     }
 
-    .client-card,
-    .livreur-card{
+    .client-card {
         padding: 15px;
         min-height: auto;
     }
 
-    .icon{
-        width: 50px;
-        height: 50px;
-    }
-
-    h2{
-        font-size: 20px;
-    }
-
-    .clients-header{
+    .clients-header {
         flex-direction: column;
         gap: 10px;
     }
 
-    .clients-header input{
+    .clients-header input {
         width: 100%;
-    }
-
-    .badge{
-        font-size: 12px;
-        padding: 5px 10px;
     }
 }
 
-
-/* =========================
-   PETIT MOBILE
-========================= */
-@media (max-width: 400px){
-
-    .client-card,
-    .livreur-card{
+/* ========================= PETIT MOBILE ========================= */
+@media (max-width: 400px) {
+    .client-card {
         font-size: 14px;
-    }
-
-    .badge{
-        font-size: 11px;
-        padding: 4px 8px;
     }
 }

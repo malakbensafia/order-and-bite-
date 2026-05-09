@@ -195,6 +195,16 @@ const StoreContextProvider = (props) => {
     for (const id in cartItems) total += cartItems[id];
     return total;
   };
+const clearCart = async () => {
+  setCartItems({})
+  if (panierId) {
+    await supabase
+      .from("lignepanier")
+      .delete()
+      .eq("idpan", panierId)
+      .eq("typeligne", modePanier)  
+  }
+}
 
   // =========================
   // CONTEXT VALUE
@@ -213,7 +223,8 @@ const StoreContextProvider = (props) => {
     user,
     login,
     logout,
-     refreshPlats: fetchPlats
+     refreshPlats: fetchPlats,
+       clearCart 
   };
 
   return (

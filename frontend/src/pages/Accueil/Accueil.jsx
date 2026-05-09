@@ -44,7 +44,7 @@ const Accueil = ({
         </>
       )}
 
-      {/* ✅ UTILISATEUR CONNECTÉ */}
+      {/*  UTILISATEUR CONNECTÉ */}
       {user && (
         <>
           <CategoryList

@@ -12,7 +12,7 @@
 }
 
 .avis-toggle-btn {
-  background: #ff6b35;
+  background: #3E2C23;
   color: white;
   border: none;
   padding: 6px 14px;
@@ -23,7 +23,7 @@
 }
 
 .avis-toggle-btn:hover {
-  background: #e55a25;
+  background:#3E2C23;
 }
 
 .avis-form {

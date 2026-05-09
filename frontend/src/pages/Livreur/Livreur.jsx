@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Livreur.css";
+import LivraisonsEnCours from "../../components/LivraisonsEnCours/LivraisonsEnCours";
 import {
     FaBox,
     FaTruck,
@@ -9,6 +10,9 @@ import {
     FaMoneyBill,
     FaBars
 } from "react-icons/fa";
+import CommandesLivreur from "../../components/CommandesLivreur/CommandesLivreur";
+import ProfilLivreur from "../../components/ProfilLivreur/ProfilLivreur";
+import LivreesLivreur from "../../components/LivreesLivreur/LivreesLivreur";
 
 const Livreur = () => {
 
@@ -20,8 +24,6 @@ const Livreur = () => {
         { key: "commandes", label: "Commandes disponibles", icon: <FaBox /> },
         { key: "enCours", label: "En cours", icon: <FaTruck /> },
         { key: "livrees", label: "Livrées", icon: <FaCheck /> },
-        { key: "revenus", label: "Revenus", icon: <FaMoneyBill /> },
-        { key: "carte", label: "Carte", icon: <FaMapMarkerAlt /> },
     ];
 
     return (
@@ -65,56 +67,14 @@ const Livreur = () => {
                 {/* CONTENT */}
                 <div className="content">
 
-                    {page === "commandes" && (
-                        <div>
-                            <h2>📦 Commandes disponibles</h2>
-                        </div>
-                    )}
+                    {page === "commandes" && <CommandesLivreur/>}
 
-                    {page === "enCours" && (
-                        <div>
-                            <h2>🚚 Livraisons en cours</h2>
-                        </div>
-                    )}
+                    {page === "enCours" && <LivraisonsEnCours />}
 
-                    {page === "livrees" && (
-                        <div>
-                            <h2> Livrées</h2>
-                        </div>
-                    )}
+                    {page === "livrees" && <LivreesLivreur />}
 
-                    {page === "revenus" && (
-                        <div>
-                            <h2> Revenus</h2>
-                        </div>
-                    )}
-
-                    {page === "profil" && (
-                        <div className="profil-livreur-container">
-                            <div className="profil-livreur-overlay">
-                                <div className="profil-header">
-                                    <h2>Mon profil livreur</h2>
-                                </div>
-
-                                <div className="profil-cards">
-                                    <div className="profil-card">
-                                        <h4>Nom</h4>
-                                        <p>Livreur 01</p>
-                                    </div>
-
-                                    <div className="profil-card">
-                                        <h4>Téléphone</h4>
-                                        <p>05 XX XX XX XX</p>
-                                    </div>
-
-                                    <div className="profil-card status">
-                                        <h4>Statut</h4>
-                                        <p>Disponible</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    )}
+                   
+                    {page === "profil" && <ProfilLivreur />}
 
                 </div>
 

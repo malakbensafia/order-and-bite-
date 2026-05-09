@@ -1,0 +1,252 @@
+/* ========================
+   PROFIL LIVREUR — CSS
+   ======================== */
+
+.profil-livreur-wrapper {
+    padding: 0 0 40px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    font-family: 'Segoe UI', sans-serif;
+    color: #3E2C23;
+}
+
+/* ---- HERO ---- */
+.pl-hero {
+    background: linear-gradient(135deg, #3E2C23 0%, #5a3f30 60%, #7a5543 100%);
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+}
+
+.pl-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 80% 50%, rgba(251, 191, 36, 0.15) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.pl-hero-overlay {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 36px 40px;
+    flex-wrap: wrap;
+}
+
+.pl-avatar {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #f59e0b, #fbbf24);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    color: #fff;
+    box-shadow: 0 4px 20px rgba(251, 191, 36, 0.4);
+    flex-shrink: 0;
+}
+
+.pl-hero-info {
+    flex: 1;
+}
+
+.pl-hero-info h1 {
+    color: #fff;
+    font-size: 26px;
+    font-weight: 700;
+    margin: 0 0 8px;
+}
+
+.pl-badge {
+    display: inline-block;
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
+.pl-badge.dispo {
+    background: rgba(34, 197, 94, 0.2);
+    color: #86efac;
+    border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.pl-badge.indispo {
+    background: rgba(239, 68, 68, 0.2);
+    color: #fca5a5;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.pl-edit-btn {
+    display: flex;
+    align-items: center;
+    gap:8px;
+    padding: 10px 22px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(4px);
+}
+
+.pl-edit-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* ---- INFO GRID ---- */
+.pl-info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+.pl-info-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 22px 24px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    box-shadow: 0 2px 12px rgba(62, 44, 35, 0.08);
+    border: 1px solid #f1f5f9;
+    transition: box-shadow 0.2s ease;
+}
+
+.pl-info-card:hover {
+    box-shadow: 0 6px 20px rgba(62, 44, 35, 0.12);
+}
+
+.pl-info-icon {
+    width: 42px;
+    height: 42px;
+    background: linear-gradient(135deg, #fef3c7, #fde68a);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: #d97706;
+    flex-shrink: 0;
+}
+
+.pl-info-content {
+    flex: 1;
+}
+
+.pl-info-content label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.pl-info-content p {
+    font-size: 15px;
+    font-weight: 600;
+    color: #3E2C23;
+    margin: 0;
+}
+
+.pl-info-content input,
+.pl-info-content select {
+    width: 100%;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #3E2C23;
+    outline: none;
+    transition: border-color 0.2s;
+    background: #f8fafc;
+}
+
+.pl-info-content input:focus,
+.pl-info-content select:focus {
+    border-color: #f59e0b;
+    background: #fff;
+}
+
+/* ---- ACTIONS ---- */
+.pl-actions {
+    display: flex;
+    gap: 14px;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+}
+
+.pl-save-btn,
+.pl-cancel-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 28px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease;
+}
+
+.pl-save-btn {
+    background: linear-gradient(135deg, #f59e0b, #fbbf24);
+    color: #fff;
+    box-shadow: 0 4px 14px rgba(245, 158, 11, 0.35);
+}
+
+.pl-save-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(245, 158, 11, 0.45);
+}
+
+.pl-cancel-btn {
+    background: #f1f5f9;
+    color: #3E2C23;
+}
+
+.pl-cancel-btn:hover {
+    background: #e2e8f0;
+}
+
+.pl-loading {
+    text-align: center;
+    padding: 60px;
+    color: #3E2C23;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 768px) {
+    .pl-info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .pl-hero-overlay {
+        padding: 24px 20px;
+        gap: 16px;
+    }
+
+    .pl-hero-info h1 {
+        font-size: 20px;
+    }
+
+    .pl-avatar {
+        width: 60px;
+        height: 60px;
+        font-size: 24px;
+    }
+}

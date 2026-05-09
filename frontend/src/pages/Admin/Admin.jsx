@@ -3,6 +3,12 @@ import "./Admin.css";
 import ClientsPage from "../../components/ClientsPage/ClientsPage";
 import LivreursPage from "../../components/LivreursPage/LivreursPage";
 import PlatsPage from "../../components/PlatsPage/PlatsPage";
+import CommandesPage from "../CommandesPage/CommandesPage";
+import ReservationsAdmin from "../../components/ReservationsAdmin/ReservationsAdmin";
+import CodesPromoPage from "../../components/CodesPromoPage/CodesPromoPage";
+import FidelitePage from "../../components/FidelitePage/FidelitePage";
+import PaiementsPage from "../../components/PaiementsPage/PaiementsPage";
+import ProfilAdmin from "../../components/ProfilAdmin/ProfilAdmin";
 
 import {
     FaStore, FaChartBar, FaBox, FaHamburger, FaUsers,
@@ -20,7 +26,7 @@ const Admin = () => {
     const [page, setPage] = useState("profil");
     const [open, setOpen] = useState(false);
 
-    // 🔥 PROMOTIONS STATES
+    // PROMOTIONS STATES
     const [plats, setPlats] = useState([]);
     const [selectedPlats, setSelectedPlats] = useState([]);
     const [taux, setTaux] = useState(20);
@@ -38,7 +44,6 @@ const Admin = () => {
 
     const menu = [
         { key: "profil", label: "Profil", icon: <FaStore /> },
-        { key: "dashboard", label: "Dashboard", icon: <FaChartBar /> },
         { key: "commandes", label: "Commandes", icon: <FaBox /> },
         { key: "plats", label: "Plats", icon: <FaHamburger /> },
         { key: "clients", label: "Clients", icon: <FaUsers /> },
@@ -50,7 +55,6 @@ const Admin = () => {
         { key: "paiements", label: "Paiements", icon: <FaCreditCard /> },
     ];
 
-    // 🔥 CHARGER PLATS
     useEffect(() => {
         const fetchPlats = async () => {
             const { data } = await supabase.from("plat").select("*");
@@ -193,11 +197,7 @@ const Admin = () => {
 
                 <div className="content">
 
-                    {page === "profil" && (
-                        <div className="profil-container">
-                            <div className="profil-overlay"><h2>Order & Bite Dashboard</h2></div>
-                        </div>
-                    )}
+                   {page === "profil" && <ProfilAdmin />}
 
                     {page === "dashboard" && (
                         <div className="stats">
@@ -208,7 +208,7 @@ const Admin = () => {
                         </div>
                     )}
 
-                    {page === "commandes" && <h2>Commandes</h2>}
+                    {page === "commandes" && <CommandesPage />}
                     {page === "plats" && <PlatsPage />}
                     {page === "clients" && <ClientsPage />}
                     {page === "livreurs" && <LivreursPage />}
@@ -267,90 +267,10 @@ const Admin = () => {
                         </div>
                     )}
 
-                    {/* 🔥 CODES PROMO — NOUVEAU */}
-                    {page === "codespromo" && (
-                        <div className="promotions-container">
-                            <h2>Gestion des codes promo</h2>
-
-                            {/* FORMULAIRE */}
-                            <div className="promo-form">
-
-                                <div className="promo-form-row">
-                                    <label>Code</label>
-                                    <input
-                                        type="text"
-                                        placeholder="Ex: ETE2025"
-                                        value={nouveauCode}
-                                        onChange={(e) => setNouveauCode(e.target.value.toUpperCase())}
-                                    />
-                                </div>
-
-                                <div className="promo-form-row">
-                                    <label>Type de réduction</label>
-                                    <select value={typeReduction} onChange={(e) => setTypeReduction(e.target.value)}>
-                                        <option value="pourcentage">Pourcentage (%)</option>
-                                        <option value="montant">Montant fixe (DA)</option>
-                                    </select>
-                                </div>
-
-                                <div className="promo-form-row">
-                                    <label>Valeur {typeReduction === "pourcentage" ? "(%)" : "(DA)"}</label>
-                                    <input
-                                        type="number"
-                                        min="1"
-                                        max={typeReduction === "pourcentage" ? 100 : undefined}
-                                        value={valeurReduction}
-                                        onChange={(e) => setValeurReduction(Number(e.target.value))}
-                                    />
-                                </div>
-
-                                <div className="promo-form-row">
-                                    <label>Date début</label>
-                                    <input type="date" value={debutCode} onChange={(e) => setDebutCode(e.target.value)} />
-                                </div>
-
-                                <div className="promo-form-row">
-                                    <label>Date fin</label>
-                                    <input type="date" value={finCode} onChange={(e) => setFinCode(e.target.value)} />
-                                </div>
-
-                                <button className="promo-btn" onClick={creerCodePromo}>
-                                    Créer le code
-                                </button>
-                            </div>
-
-                            <hr />
-
-                            {/* LISTE CODES */}
-                            <h3>Codes existants</h3>
-                            <div className="promo-list">
-                                {codesPromo.length === 0 && <p>Aucun code promo</p>}
-                                {codesPromo.map((c) => (
-                                    <div key={c.idcodepromo} className="promo-item">
-                                        <span className="promo-plat-name" style={{ fontWeight: "bold", letterSpacing: 1 }}>
-                                            {c.code}
-                                        </span>
-                                        <span className="promo-taux">
-                                            -{c.valeurreduction}{c.typereduction === "pourcentage" ? "%" : " DA"}
-                                        </span>
-                                        <span className="promo-dates">
-                                            {c.datedebut} → {c.datefin}
-                                        </span>
-                                        <span style={{ color: isCodeActif(c) ? "green" : "gray", fontWeight: "bold" }}>
-                                            {isCodeActif(c) ? " Actif" : " Expiré"}
-                                        </span>
-                                        <button className="promo-delete-btn" onClick={() => supprimerCodePromo(c.idcodepromo)}>
-                                            Supprimer
-                                        </button>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    )}
-
-                    {page === "fidelite" && <h2>Fidélité</h2>}
-                    {page === "reservations" && <h2>Réservations</h2>}
-                    {page === "paiements" && <h2>Paiements</h2>}
+                    {page === "codespromo" && <CodesPromoPage />}
+                    {page === "fidelite" && <FidelitePage />}
+                    {page === "reservations" && <ReservationsAdmin />}
+                    {page === "paiements" && <PaiementsPage />} 
 
                 </div>
             </div>

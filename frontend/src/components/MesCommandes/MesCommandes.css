@@ -1,0 +1,211 @@
+/* ========================
+   MES COMMANDES — CSS
+   ======================== */
+
+.mes-commandes {
+    padding: 10px 0 40px;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.mc-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #3E2C23;
+    margin-bottom: 24px;
+}
+
+.mc-empty {
+    color: #94a3b8;
+    font-size: 15px;
+    text-align: center;
+    padding: 40px 0;
+}
+
+/* ---- LIST ---- */
+.mc-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+/* ---- CARD ---- */
+.mc-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 20px 24px;
+    box-shadow: 0 2px 12px rgba(62, 44, 35, 0.08);
+    border: 1px solid #f1f5f9;
+    cursor: pointer;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.mc-card:hover {
+    box-shadow: 0 6px 20px rgba(62, 44, 35, 0.13);
+    transform: translateY(-2px);
+}
+
+.mc-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.mc-id {
+    font-size: 15px;
+    font-weight: 700;
+    color: #3E2C23;
+    display: flex;
+    align-items: center;
+}
+
+.mc-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.mc-card-body {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.mc-info {
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    color: #64748b;
+    margin: 0;
+}
+
+.mc-total {
+    font-size: 16px;
+    font-weight: 700;
+    color: #3E2C23;
+    margin: 0;
+}
+
+/* ---- MODAL ---- */
+.mc-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+}
+
+.mc-modal {
+    background: #fff;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 480px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    overflow: hidden;
+}
+
+.mc-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.mc-modal-header h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #3E2C23;
+    margin: 0;
+}
+
+.mc-modal-close {
+    background: #f1f5f9;
+    border: none;
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    color: #64748b;
+    transition: background 0.2s;
+}
+
+.mc-modal-close:hover {
+    background: #e2e8f0;
+}
+
+.mc-modal-body {
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 340px;
+    overflow-y: auto;
+}
+
+.mc-ligne {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    background: #f8fafc;
+    border-radius: 10px;
+    gap: 8px;
+}
+
+.mc-ligne-nom {
+    flex: 1;
+    font-size: 14px;
+    font-weight: 600;
+    color: #3E2C23;
+}
+
+.mc-ligne-qty {
+    font-size: 13px;
+    color: #94a3b8;
+    font-weight: 500;
+}
+
+.mc-ligne-prix {
+    font-size: 14px;
+    font-weight: 700;
+    color: #3E2C23;
+}
+
+.mc-modal-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 24px;
+    border-top: 1px solid #f1f5f9;
+    font-size: 16px;
+    color: #3E2C23;
+}
+
+.mc-modal-footer strong {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 768px) {
+    .mc-card {
+        padding: 16px;
+    }
+
+    .mc-card-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

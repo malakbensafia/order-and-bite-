@@ -1,94 +1,83 @@
-.categories{
-    display: flex;
-    flex-direction: column;
-    gap:20px;
-
+.categories {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
 }
-.categories h1{
+
+.categories h1 {
   margin-top: 10px;
-    color:#3E2C23;
-    font-weight: 500;
-    margin-left: 10px;
-
-}
-.categories-text{
-    max-width: 60%;
-    columns:#3E2C23;
-    color:#3E2C23;
-    margin-left: 10px;
-
+  color: #3E2C23;
+  font-weight: 500;
+  margin-left: 10px;
 }
 
+.categories-text {
+  color: #3E2C23;
+  margin-left: 10px;
+}
 
 .categories-list {
   display: flex;
   gap: 50px;
-
   overflow-x: auto;
   overflow-y: hidden;
-
   scroll-behavior: smooth;
-
   margin: 20px 0px;
   padding: 10px 0;
-
   cursor: grab;
-    overscroll-behavior-x: contain;
-
+  overscroll-behavior-x: contain;
   -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
 }
 
-.categories-list::-webkit-scrollbar{
-    display: none;
+.categories-list::-webkit-scrollbar {
+  display: none;
 }
 
 .categories-list-item {
   text-align: center;
   flex: 0 0 auto;
   min-width: 100px;
+  scroll-snap-align: start;
 }
-
 
 .categories-list-item img {
   width: 7.5vw;
-  min-width:80px;
-  cursor:pointer;
+  min-width: 80px;
+  cursor: pointer;
   height: 100px;
-  border-radius: 50%;  
-  object-fit: cover;  
+  border-radius: 50%;
+  object-fit: cover;
   display: block;
   margin: 0 auto;
   transition: 0.3s;
 }
+
 .categories-list-item p {
-    margin-top: 10px;
-    color:#723e1b;
-    font-size: max(1.4vw,16px);
-    cursor: pointer;
-
-}
-.categories-list hr{
-    margin:10px 0px;
-    height:2px;
-    background-color:aliceblue;
-    border:none;
+  margin-top: 10px;
+  color: #723e1b;
+  font-size: max(1.4vw, 16px);
+  cursor: pointer;
 }
 
-
+.categories hr {
+  margin: 10px 0px;
+  height: 2px;
+  background-color: aliceblue;
+  border: none;
+}
 
 .categories-list-item img:hover {
   transform: scale(1.1);
 }
-.categories-list-item  img.active{
-    border:4px solid #3E2C23;
-    padding:2px;
 
+.categories-list-item img.active {
+  border: 4px solid #3E2C23;
+  padding: 2px;
 }
-/* =========================
-   MOBILE (max-width: 600px)
-   ========================= */
-@media (max-width: 600px) {
 
+@media (max-width: 600px) {
   .categories h1 {
     font-size: 20px;
     margin-left: 5px;
@@ -97,7 +86,6 @@
   .categories-text {
     font-size: 14px;
     margin-left: 5px;
-    max-width: 100%; /* 🔥 correction importante */
   }
 
   .categories-list {
@@ -110,19 +98,11 @@
   }
 
   .categories-list-item img {
-    width: 70px; /* 🔥 fixe au lieu de vw */
+    width: 70px;
     height: 70px;
   }
 
   .categories-list-item p {
     font-size: 12px;
   }
-
-}
-.categories-list {
-  scroll-snap-type: x mandatory;
-}
-
-.categories-list-item {
-  scroll-snap-align: start;
 }

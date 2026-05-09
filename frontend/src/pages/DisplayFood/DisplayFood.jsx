@@ -4,7 +4,7 @@ import FoodItem from '../../components/FoodItem/FoodItem'
 import supabase from '../../api/supabaseClient'
 import { imagesMap } from '../../assets/assets'
 
-const DisplayFood = ({ category }) => {
+const DisplayFood = ({ category, onSelectPlat }) => {
 
   const [plats, setPlats] = useState([])
 
@@ -52,7 +52,7 @@ const DisplayFood = ({ category }) => {
           .map((item) => {
 
             const key = item.image_name?.replace(/[\r\n\t]/g, '').trim()
-            
+
             const image =
               !key
                 ? null
@@ -66,8 +66,9 @@ const DisplayFood = ({ category }) => {
                 id={item.idplat}
                 name={item.nomplat}
                 description={item.description}
-                image={image}   // 👈 ici changement
+                image={image}   
                 item={item}
+                onSelectPlat={onSelectPlat}
               />
             )
           })

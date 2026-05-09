@@ -52,7 +52,7 @@
     text-align: center;
   }
 
-  /* 🔥 transforme grid en colonne */
+ 
   .footer-content {
     grid-template-columns: 1fr;
     gap: 30px;

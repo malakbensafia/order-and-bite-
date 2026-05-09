@@ -29,12 +29,7 @@
   opacity: 0.8;
   font-size: 18px;
 }
-.client-dashboard {
-  padding: 30px;
-  position: relative;
-  z-index: 2;
-  margin-top: 40px;
-}
+
 /* ONGLETS */
 .client-tabs {
   display: flex;
@@ -59,19 +54,7 @@
   background: #a47251;
   color: white;
 }
-/* =========================
-   GESTION DES ADRESSES
-========================= */
-.adresses-container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
-  background: white;
-  border-radius: 16px;
-  min-height: 400px;
-  max-height: 500px;
-  overflow-y: auto;
-}
+
 .adresses-list {
   display: flex;
   flex-direction: column;

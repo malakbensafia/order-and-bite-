@@ -15,6 +15,14 @@ import Livreur from "./pages/Livreur/Livreur";
 import ResePrecommande from "./pages/ResePrecommande/ResePrecommande";
 import ProtectedRoute from "./routes/ProtectedRoute"
 import { useAuth } from "./context/AuthContext"
+import PlaceOrder from "./pages/PlaceOrder/PlaceOrder";
+import Notifications from "./pages/Notifications/Notifications";
+import MenuPrecommande from "./pages/MenuPrecommande/MenuPrecommande";
+
+import PlaceOrderReservation from "./pages/PlaceOrderReservation/PlaceOrderReservation";
+
+
+
 
 const App = () => {
   const [showLogin, setShowLogin] = useState(false);
@@ -86,6 +94,15 @@ const App = () => {
             }
           />
           <Route
+            path="/placeorder"
+            element={
+              <ProtectedRoute role="client">
+                <PlaceOrder />
+
+              </ProtectedRoute>
+            }
+          />
+          <Route
             path="/reservation"
             element={
               <ProtectedRoute role="client">
@@ -122,6 +139,19 @@ const App = () => {
               <ClientLayout transparent={true} hideCart={true}>
                 <ResePrecommande />
 
+              </ClientLayout>
+            </ProtectedRoute>
+          } />
+          <Route path="/notifications" element={<Notifications />} />
+          <Route path="/placeorder-reservation" element={
+            <ProtectedRoute role="client">
+              <PlaceOrderReservation />
+              </ProtectedRoute>} />
+
+          <Route path="/menu-precommande" element={
+            <ProtectedRoute role="client">
+              <ClientLayout transparent={true}>
+                <MenuPrecommande />
               </ClientLayout>
             </ProtectedRoute>
           } />

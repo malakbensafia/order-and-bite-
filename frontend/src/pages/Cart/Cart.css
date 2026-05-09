@@ -102,6 +102,108 @@
     color:white;
     border-radius: 4px;
 }
+.cart-address-select {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cart-address-select p {
+  color: #493628;
+  font-weight: 600;
+  font-size: max(1vw, 13px);
+}
+
+.cart-address-select select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #e2e2e2;
+  border-radius: 4px;
+  font-size: max(1vw, 13px);
+  color: #493628;
+  background-color: #eaeaea;
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23493628' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+}
+
+.cart-address-select select:focus {
+  border-color: #3E2C23;
+}
+
+.cart-address-select small {
+  color: #888;
+  font-size: 12px;
+}
+.btn-back-menu-precommande {
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    background: white;
+    color: #3E2C23;
+    border: 2px solid #3E2C23;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-back-menu-precommande:hover {
+    background: #f5ede8;
+}
+.cart-fidelite {
+  margin: 15px 0;
+  padding: 12px;
+  background: #fff8f0;
+  border-radius: 10px;
+  border: 1px solid #f0d9c0;
+}
+
+.cart-fidelite p {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.btn-utiliser-points {
+  background: #3E2C23;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  width: 100%;
+}
+
+.btn-utiliser-points:hover {
+  background: #5a3f30;
+}
+
+.btn-annuler-points {
+  background: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  width: 100%;
+}
+
+.points-insuffisants {
+  font-size: 12px;
+  color: #999;
+  font-style: italic;
+}
+
+.no-address {
+  color: #e74c3c;
+  font-size: 13px;
+  margin: 0;
+}
 @media (max-width: 768px) {
 
   .cart-item {

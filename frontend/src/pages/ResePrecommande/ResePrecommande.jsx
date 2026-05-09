@@ -1,14 +1,18 @@
 import React, { useState, useEffect, useContext } from "react";
-import "./ResePrecommande.css";
+import "../Reservation/Reservation.css";
 import supabase from "../../api/supabaseClient";
 import { zones } from "../../assets/assets";
-import { StoreContext } from '../../context/StoreContext'; 
+import { StoreContext } from '../../context/StoreContext';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 
 const ResePrecommande = () => {
-  const { setModePanier } = useContext(StoreContext); 
+  const navigate = useNavigate();
+  const { user } = useAuth();
+  const { setModePanier, clearCart } = useContext(StoreContext);
 
   useEffect(() => {
-    setModePanier("precommande"); 
+    setModePanier("precommande");
   }, []);
 
   const [zone, setZone] = useState(null);
@@ -21,17 +25,9 @@ const ResePrecommande = () => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [reservedDates, setReservedDates] = useState([]);
   const [loadingHeures, setLoadingHeures] = useState(false);
-  const [menuItems, setMenuItems] = useState([]);
-  const [panier, setPanier] = useState([]);
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-
-  useEffect(() => {
-    supabase.from("plat").select("*").eq("disponibilite", true).then(({ data }) => {
-      if (data) setMenuItems(data);
-    });
-  }, []);
 
   useEffect(() => {
     if (zone) {
@@ -58,7 +54,7 @@ const ResePrecommande = () => {
 
   const chargerHeuresDisponibles = async (tableId, date) => {
     setLoadingHeures(true);
-    const toutesHeures = ["12:00","12:30","13:00","13:30","19:00","19:30","20:00","20:30","21:00","21:30"];
+    const toutesHeures = ["12:00", "12:30", "13:00", "13:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30"];
     const dispo = await Promise.all(
       toutesHeures.map(async (heure) => ({
         heure,
@@ -70,10 +66,10 @@ const ResePrecommande = () => {
   };
 
   const ouvrirReservation = async (table) => {
+   
     setSelectedTable(table);
     setFormData({ date: "", heure: "" });
     setHeuresDisponibles([]);
-    setPanier([]);
     setCurrentMonth(new Date());
     await chargerDatesReservees(table.idtable);
     setStep("date");
@@ -85,72 +81,23 @@ const ResePrecommande = () => {
     setTimeout(() => setStep("heure"), 200);
   };
 
-  const selectionnerHeure = (heure) => {
-    setFormData((prev) => ({ ...prev, heure }));
-    setTimeout(() => setStep("menu"), 200);
-  };
-
-  const confirmerTout = async () => {
-    const { data: authData } = await supabase.auth.getUser();
-    const userId = authData?.user?.id ?? null;
-
-    const { data: resaData, error: resaError } = await supabase
-      .from("reservation").insert({
-        datereservation: formData.date,
-        heureres: formData.heure,
-        nbrpersonnes: selectedTable.capacitetable,
-        statutres: "confirmee",
-        idtable: selectedTable.idtable,
-        idclient: userId,
-        idadmin: 7,
-      }).select().single();
-
-    if (resaError) { alert("Erreur réservation : " + resaError.message); return; }
-
-    if (panier.length > 0 && resaData?.idreservation) {
-      const lignes = panier.map((item) => ({
-        idreservation: resaData.idreservation,
-        idplat: item.idplat,
-        quantite: item.quantite,
-        prixunitaire: item.prix,
-      }));
-      await supabase.from("precommande").insert(lignes);
-    }
-
-    await supabase.from("tablerest")
-      .update({ statutable: "occupe" }).eq("idtable", selectedTable.idtable);
-
-    const { data } = await supabase.from("tablerest").select("*").eq("emplacement", zone);
-    if (data) setTables(data);
-
-    setStep("confirm");
+  //  navigue vers MenuPrecommande
+  const selectionnerHeure = async(heure) => {
+    const newFormData = { ...formData, heure };
+    setFormData(newFormData);
+      await clearCart() 
+    setTimeout(() => {
+      navigate("/menu-precommande", {
+        state: { selectedTable, formData: newFormData }
+      });
+    }, 200);
   };
 
   const fermerFormulaire = () => {
     setStep(null);
     setSelectedTable(null);
     setFormData({ date: "", heure: "" });
-    setPanier([]);
   };
-
-  const ajouterAuPanier = (item) => {
-    setPanier((prev) => {
-      const existe = prev.find((p) => p.idplat === item.idplat);
-      if (existe) return prev.map((p) => p.idplat === item.idplat ? { ...p, quantite: p.quantite + 1 } : p);
-      return [...prev, { ...item, quantite: 1 }];
-    });
-  };
-
-  const retirerDuPanier = (idplat) => {
-    setPanier((prev) => {
-      const item = prev.find((p) => p.idplat === idplat);
-      if (!item) return prev;
-      if (item.quantite === 1) return prev.filter((p) => p.idplat !== idplat);
-      return prev.map((p) => p.idplat === idplat ? { ...p, quantite: p.quantite - 1 } : p);
-    });
-  };
-
-  const totalPanier = panier.reduce((sum, item) => sum + item.prix * item.quantite, 0);
 
   const getDaysInMonth = () => {
     const year = currentMonth.getFullYear();
@@ -179,7 +126,7 @@ const ResePrecommande = () => {
   const formatDate = (ds) => {
     if (!ds) return "";
     const [y, m, d] = ds.split("-");
-    const months = ["jan","fév","mar","avr","mai","juin","juil","août","sep","oct","nov","déc"];
+    const months = ["jan", "fév", "mar", "avr", "mai", "juin", "juil", "août", "sep", "oct", "nov", "déc"];
     return `${d} ${months[parseInt(m) - 1]} ${y}`;
   };
 
@@ -214,7 +161,6 @@ const ResePrecommande = () => {
             <h2>Tables disponibles — {zone}</h2>
 
             <div className="tables-and-form">
-
               <div className="tables-grid">
                 {loading ? <p>Chargement des tables...</p> : tables.length === 0 ? <p>Aucune table disponible</p> : (
                   tables.map((table) => (
@@ -238,15 +184,10 @@ const ResePrecommande = () => {
 
               {step && selectedTable && (
                 <div className="form-resa-box">
-
                   <div className="tf-steps">
-                    <div className={`tf-step ${step === "date" ? "active" : ""}`}>📅 Date</div>
+                    <div className={`tf-step ${step === "date" ? "active" : ""}`}> Date</div>
                     <span className="tf-sep">›</span>
-                    <div className={`tf-step ${step === "heure" ? "active" : ""}`}>🕐 Heure</div>
-                    <span className="tf-sep">›</span>
-                    <div className={`tf-step ${step === "menu" ? "active" : ""}`}>🍽️ Menu</div>
-                    <span className="tf-sep">›</span>
-                    <div className={`tf-step ${step === "confirm" ? "active" : ""}`}>✅ Confirmé</div>
+                    <div className={`tf-step ${step === "heure" ? "active" : ""}`}> Heure</div>
                   </div>
 
                   <h3>Table {selectedTable.numtable}</h3>
@@ -264,7 +205,7 @@ const ResePrecommande = () => {
                             onClick={() => setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1))}>▶</button>
                         </div>
                         <div className="calendar-weekdays">
-                          {["lun","mar","mer","jeu","ven","sam","dim"].map((d) => <div key={d}>{d}</div>)}
+                          {["lun", "mar", "mer", "jeu", "ven", "sam", "dim"].map((d) => <div key={d}>{d}</div>)}
                         </div>
                         <div className="calendar-days">
                           {getDaysInMonth().map((day, idx) => {
@@ -298,7 +239,7 @@ const ResePrecommande = () => {
                   {step === "heure" && (
                     <>
                       <button className="back-btn small" onClick={() => setStep("date")}>← Changer la date</button>
-                      <div className="tf-recap">📅 {formatDate(formData.date)}</div>
+                      <div className="tf-recap"> {formatDate(formData.date)}</div>
                       <p className="heures-title">Sélectionnez une heure</p>
                       <div className="heures-grid">
                         {loadingHeures ? (
@@ -318,75 +259,11 @@ const ResePrecommande = () => {
                       </div>
                     </>
                   )}
-
-                  {step === "menu" && (
-                    <>
-                      <button className="back-btn small" onClick={() => setStep("heure")}>← Changer l'heure</button>
-                      <div className="tf-recap">📅 {formatDate(formData.date)} · 🕐 {formData.heure}</div>
-                      <p className="heures-title">Précommandez vos plats (optionnel)</p>
-                      <div className="plats-mini-grid">
-                        {menuItems.map((item) => {
-                          const qte = panier.find((p) => p.idplat === item.idplat)?.quantite || 0;
-                          return (
-                            <div key={item.idplat} className="plat-mini-card">
-                              <div className="plat-mini-info">
-                                <span className="plat-mini-nom">{item.nomplat}</span>
-                                <span className="plat-mini-prix">{item.prix} DA</span>
-                              </div>
-                              <div className="plat-mini-actions">
-                                {qte > 0 ? (
-                                  <>
-                                    <button className="qty-btn" onClick={() => retirerDuPanier(item.idplat)}>−</button>
-                                    <span className="qty-val">{qte}</span>
-                                    <button className="qty-btn" onClick={() => ajouterAuPanier(item)}>+</button>
-                                  </>
-                                ) : (
-                                  <button className="add-btn" onClick={() => ajouterAuPanier(item)}>+ Ajouter</button>
-                                )}
-                              </div>
-                            </div>
-                          );
-                        })}
-                      </div>
-                      {panier.length > 0 && (
-                        <div className="panier-recap">
-                          {panier.map((item) => (
-                            <div key={item.idplat} className="panier-ligne">
-                              <span>{item.nomplat} ×{item.quantite}</span>
-                              <span>{item.prix * item.quantite} DA</span>
-                            </div>
-                          ))}
-                          <div className="panier-total">Total : <strong>{totalPanier} DA</strong></div>
-                        </div>
-                      )}
-                      <button className="reserve-btn confirm-final-btn" onClick={confirmerTout}>
-                        {panier.length > 0 ? "Confirmer réservation + précommande" : "Confirmer la réservation"}
-                      </button>
-                    </>
-                  )}
-
-                  {step === "confirm" && (
-                    <div className="tf-success">
-                      <div className="tf-success-icon">✅</div>
-                      <h3>Réservation confirmée !</h3>
-                      <p>
-                        Table <strong>{selectedTable.numtable}</strong><br />
-                        Le <strong>{formatDate(formData.date)}</strong> à <strong>{formData.heure}</strong>
-                      </p>
-                      {panier.length > 0 && (
-                        <p>Précommande : <strong>{totalPanier} DA</strong></p>
-                      )}
-                      <button className="reserve-btn" onClick={fermerFormulaire}>Fermer</button>
-                    </div>
-                  )}
-
                 </div>
               )}
-
             </div>
           </div>
         )}
-
       </div>
     </div>
   );
