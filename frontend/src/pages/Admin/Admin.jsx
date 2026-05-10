@@ -13,7 +13,7 @@ import ProfilAdmin from "../../components/ProfilAdmin/ProfilAdmin";
 import {
     FaStore, FaChartBar, FaBox, FaHamburger, FaUsers,
     FaTruck, FaGift, FaStar, FaCalendar, FaCreditCard,
-    FaBars, FaTicketAlt
+    FaBars, FaTicketAlt, FaTimes
 } from "react-icons/fa";
 
 import { supabase } from "../../api/supabaseClient";
@@ -34,7 +34,7 @@ const Admin = () => {
     const [fin, setFin] = useState("");
     const [promotions, setPromotions] = useState([]);
 
-    // 🔥 CODES PROMO STATES
+    // CODES PROMO STATES
     const [codesPromo, setCodesPromo] = useState([]);
     const [nouveauCode, setNouveauCode] = useState("");
     const [valeurReduction, setValeurReduction] = useState(10);
@@ -49,7 +49,7 @@ const Admin = () => {
         { key: "clients", label: "Clients", icon: <FaUsers /> },
         { key: "livreurs", label: "Livreurs", icon: <FaTruck /> },
         { key: "promotions", label: "Promotions", icon: <FaGift /> },
-        { key: "codespromo", label: "Codes Promo", icon: <FaTicketAlt /> }, // 👈 NOUVEAU
+        { key: "codespromo", label: "Codes Promo", icon: <FaTicketAlt /> },
         { key: "fidelite", label: "Fidélité", icon: <FaStar /> },
         { key: "reservations", label: "Réservations", icon: <FaCalendar /> },
         { key: "paiements", label: "Paiements", icon: <FaCreditCard /> },
@@ -63,7 +63,6 @@ const Admin = () => {
         fetchPlats();
     }, []);
 
-    // 🔥 CHARGER PROMOTIONS
     useEffect(() => {
         const fetchPromotions = async () => {
             const { data } = await supabase
@@ -74,7 +73,6 @@ const Admin = () => {
         fetchPromotions();
     }, []);
 
-    // 🔥 CHARGER CODES PROMO
     useEffect(() => {
         const fetchCodesPromo = async () => {
             const { data } = await supabase
@@ -86,7 +84,6 @@ const Admin = () => {
         fetchCodesPromo();
     }, []);
 
-    // 🔥 SELECT PLATS
     const togglePlat = (id) => {
         setSelectedPlats((prev) =>
             prev.includes(id)
@@ -95,17 +92,12 @@ const Admin = () => {
         );
     };
 
-    // 🔥 SUPPRIMER PROMO
     const supprimerPromo = async (idpromoplat) => {
-        await supabase
-            .from("promotionplat")
-            .delete()
-            .eq("idpromoplat", idpromoplat);
+        await supabase.from("promotionplat").delete().eq("idpromoplat", idpromoplat);
         setPromotions(prev => prev.filter(p => p.idpromoplat !== idpromoplat));
         await refreshPlats();
     };
 
-    // 🔥 CREATE PROMO
     const appliquerPromo = async () => {
         if (!debut || !fin) { alert("Veuillez remplir les deux dates !"); return; }
         if (new Date(debut) >= new Date(fin)) { alert("La date de début doit être inférieure à la date de fin !"); return; }
@@ -125,7 +117,6 @@ const Admin = () => {
         await refreshPlats();
     };
 
-    // 🔥 CRÉER CODE PROMO
     const creerCodePromo = async () => {
         if (!nouveauCode.trim()) { alert("Veuillez saisir un code !"); return; }
         if (!debutCode || !finCode) { alert("Veuillez remplir les deux dates !"); return; }
@@ -155,13 +146,11 @@ const Admin = () => {
         alert("Code promo créé !");
     };
 
-    // 🔥 SUPPRIMER CODE PROMO
     const supprimerCodePromo = async (idcodepromo) => {
         await supabase.from("codepromo").delete().eq("idcodepromo", idcodepromo);
         setCodesPromo(prev => prev.filter(c => c.idcodepromo !== idcodepromo));
     };
 
-    // 🔥 VÉRIFIER SI CODE ACTIF
     const isCodeActif = (code) => {
         const now = new Date();
         return now >= new Date(code.datedebut) && now <= new Date(code.datefin);
@@ -179,9 +168,11 @@ const Admin = () => {
 
             <div className="admin-container">
 
+                {/* SIDEBAR — toujours visible desktop, cachée mobile */}
                 <div className={`sidebar ${open ? "open" : ""}`}>
-                    <button className="toggle-btn" onClick={() => setOpen(!open)}>
-                        <FaBars />
+                    {/* ✕ visible uniquement sur mobile */}
+                    <button className="close-sidebar" onClick={() => setOpen(false)}>
+                        <FaTimes />
                     </button>
                     <h2>Admin</h2>
                     {menu.map(item => (
@@ -195,9 +186,15 @@ const Admin = () => {
                     ))}
                 </div>
 
+                {/* CONTENT */}
                 <div className="content">
 
-                   {page === "profil" && <ProfilAdmin />}
+                    {/* BURGER — caché desktop, visible mobile */}
+                    <button className="burger-btn" onClick={() => setOpen(!open)}>
+                        <FaBars /> Menu
+                    </button>
+
+                    {page === "profil" && <ProfilAdmin />}
 
                     {page === "dashboard" && (
                         <div className="stats">
@@ -213,7 +210,6 @@ const Admin = () => {
                     {page === "clients" && <ClientsPage />}
                     {page === "livreurs" && <LivreursPage />}
 
-                    {/* PROMOTIONS */}
                     {page === "promotions" && (
                         <div className="promotions-container">
                             <h2>Gestion des promotions</h2>
@@ -270,7 +266,7 @@ const Admin = () => {
                     {page === "codespromo" && <CodesPromoPage />}
                     {page === "fidelite" && <FidelitePage />}
                     {page === "reservations" && <ReservationsAdmin />}
-                    {page === "paiements" && <PaiementsPage />} 
+                    {page === "paiements" && <PaiementsPage />}
 
                 </div>
             </div>

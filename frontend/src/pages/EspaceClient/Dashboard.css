@@ -1,7 +1,7 @@
 .client-container {
   display: flex;
   min-height: 100vh;
-  margin-top: 30px;
+  margin-top: 90px;
 }
 
 .sidebar {
@@ -19,12 +19,10 @@
   align-self: stretch;
 }
 
-/* BOUTON CLOSE — caché en desktop */
 .close-sidebar {
   display: none;
 }
 
-/* SIDEBAR toujours visible en desktop */
 .sidebar.hidden {
   display: flex !important;
   flex-direction: column;
@@ -62,7 +60,6 @@
   margin-bottom: 20px;
 }
 
-/* INPUT */
 .add-box {
   display: flex;
   gap: 10px;
@@ -85,14 +82,12 @@
   cursor: pointer;
 }
 
-/* LIST */
 .address-list {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-/* CARD */
 .card {
   background: white;
   padding: 15px;
@@ -288,12 +283,15 @@
   gap: 8px;
   white-space: nowrap;
 }
-
+.burger-btn {
+    display: none;
+}
 /* ===================== MOBILE ===================== */
 @media (max-width: 768px) {
 
   .client-container {
     flex-direction: column;
+    margin-top: 64px;
   }
 
   .sidebar.hidden {
@@ -327,5 +325,54 @@
 
   .client-dashboard {
     padding: 15px;
+    padding-bottom: 60px; /* 👈 espace avant footer */
   }
+
+  .adresses-container {
+    max-width: 100%;
+    max-height: none; /* 👈 retire la limite */
+    overflow-y: visible;
+    margin-bottom: 40px;
+  }
+
+  .adresses-list {
+    max-height: none; /* 👈 retire la limite */
+    overflow-y: visible;
+    padding-bottom: 20px;
+  }
+
+  .mode-buttons {
+    flex-direction: column;
+  }
+
+  .adresse-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .adresse-actions .btn-delete {
+    width: 100%;
+  }
+
+  .profile-card {
+    max-width: 100%;
+  }
+
+  .add-box {
+    flex-direction: column;
+  }
+  .burger-btn {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: #3E2C23;
+        color: white;
+        border: none;
+        padding: 10px 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
 }

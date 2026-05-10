@@ -84,6 +84,16 @@
   background: #3b82f6;
 }
 
+/* ✕ caché sur desktop */
+.close-sidebar {
+  display: none;
+}
+
+/* Burger caché sur desktop */
+.burger-btn {
+  display: none;
+}
+
 /* ===================== CONTENT ===================== */
 .content {
   flex: 1;
@@ -107,7 +117,6 @@
 }
 
 /* ===================== PROFIL ===================== */
-
 .profil-overlay {
   position: absolute;
   inset: 0;
@@ -123,7 +132,7 @@
   font-size: 28px;
 }
 
-/* ===================== PROMOTIONS — style fidélité ===================== */
+/* ===================== PROMOTIONS ===================== */
 .promotions-container {
   padding: 10px 0;
 }
@@ -174,9 +183,7 @@
   height: fit-content;
 }
 
-.promo-btn:hover {
-  background: #2d1f18;
-}
+.promo-btn:hover { background: #2d1f18; }
 
 /* ===================== PLATS SELECTION ===================== */
 .promo-plats-grid {
@@ -200,19 +207,10 @@
   font-size: 14px;
 }
 
-.promo-plat-card:hover {
-  transform: scale(1.03);
-  border-color: #3E2C23;
-}
+.promo-plat-card:hover { transform: scale(1.03); border-color: #3E2C23; }
+.promo-plat-card.selected { background: #22c55e; color: white; transform: scale(1.05); border-color: #16a34a; }
 
-.promo-plat-card.selected {
-  background: #22c55e;
-  color: white;
-  transform: scale(1.05);
-  border-color: #16a34a;
-}
-
-/* ===================== PROMO LIST — style adresse-card ===================== */
+/* ===================== PROMO LIST ===================== */
 .promo-list {
   margin-top: 10px;
   display: flex;
@@ -232,24 +230,9 @@
   flex-wrap: wrap;
 }
 
-.promo-plat-name {
-  font-weight: bold;
-  font-size: 15px;
-}
-
-.promo-taux {
-  background: #dcfce7;
-  color: #16a34a;
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 13px;
-  font-weight: 600;
-}
-
-.promo-dates {
-  color: gray;
-  font-size: 13px;
-}
+.promo-plat-name { font-weight: bold; font-size: 15px; }
+.promo-taux { background: #dcfce7; color: #16a34a; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+.promo-dates { color: gray; font-size: 13px; }
 
 .promo-delete-btn {
   background: #ff4d4d;
@@ -261,53 +244,77 @@
   font-size: 13px;
 }
 
-.promo-delete-btn:hover {
-  background: #e03030;
-}
-
-/* ===================== TOGGLE ===================== */
-.toggle-btn {
-  display: none;
-  background: transparent;
-  border: none;
-  color: white;
-  font-size: 22px;
-  margin-bottom: 10px;
-  cursor: pointer;
-}
+.promo-delete-btn:hover { background: #e03030; }
 
 /* ===================== MOBILE ===================== */
 @media (max-width: 768px) {
+
+  .admin-hero {
+    height: 35vh;
+    min-height: unset;
+    margin-bottom: 0;
+  }
+
+  .admin-hero-overlay h1 { font-size: 24px; }
+  .admin-hero-overlay p { font-size: 14px; }
+
   .admin-container {
     flex-direction: column;
   }
 
+  /* Sidebar cachée par défaut sur mobile */
   .sidebar {
+    display: none;
     width: 100%;
+  }
+
+  /* Sidebar ouverte */
+  .sidebar.open {
     display: flex;
     flex-direction: column;
-    max-height: 60px;
-    overflow: hidden;
-    transition: 0.3s ease;
   }
 
-  .sidebar.open {
-    max-height: 600px;
-  }
-
-  .toggle-btn {
+  /* ✕ visible dans la sidebar ouverte */
+  .close-sidebar {
     display: block;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    align-self: flex-end;
+    margin-bottom: 10px;
+    width: auto;
+    padding: 0;
   }
 
-  .sidebar h2 {
-    display: none;
-  }
+  .sidebar h2 { display: none; }
 
-  .stats {
-    grid-template-columns: 1fr;
+  /* Burger visible sur mobile */
+  .burger-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #3E2C23;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-bottom: 20px;
+    width: fit-content;
   }
 
   .content {
     padding: 15px;
+    padding-bottom: 60px;
   }
+
+  .stats { grid-template-columns: 1fr; }
+
+  .promo-form { flex-direction: column; }
+  .promo-btn { width: 100%; }
+  .promo-item { flex-direction: column; align-items: flex-start; }
+  .promo-delete-btn { width: 100%; }
 }

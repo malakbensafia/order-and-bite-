@@ -26,38 +26,34 @@ const Accueil = ({
         user={user}
       />
 
-      {/* 👤 VISITEUR NON CONNECTÉ */}
       {!user && (
         <>
-          <CategoryList
-            category={category}
-            setCategory={setCategory}
-          />
+          <CategoryList category={category} setCategory={setCategory} />
           <PlatsPopulaire />
-          <Services
-            setShowLogin={setShowLogin}
-            setRole={setRole}
-            setRoleFixed={setRoleFixed}
-            setAuthMode={setAuthMode}
-            user={user}
-          />
+          <div id="services">
+            <Services
+              setShowLogin={setShowLogin}
+              setRole={setRole}
+              setRoleFixed={setRoleFixed}
+              setAuthMode={setAuthMode}
+              user={user}
+            />
+          </div>
         </>
       )}
 
-      {/*  UTILISATEUR CONNECTÉ */}
       {user && (
         <>
-          <CategoryList
-            category={category}
-            setCategory={setCategory}
-          />
-          <Services
-            setShowLogin={setShowLogin}
-            setRole={setRole}
-            setRoleFixed={setRoleFixed}
-            setAuthMode={setAuthMode}
-            user={user}
-          />
+          <CategoryList category={category} setCategory={setCategory} />
+          <div id="services">
+            <Services
+              setShowLogin={setShowLogin}
+              setRole={setRole}
+              setRoleFixed={setRoleFixed}
+              setAuthMode={setAuthMode}
+              user={user}
+            />
+          </div>
         </>
       )}
 

@@ -26,7 +26,7 @@
 .livreur-container {
   display: flex;
   min-height: 100vh;
-    margin-top: 40px;
+  margin-top: 40px;
 }
 
 /* SIDEBAR */
@@ -37,7 +37,14 @@
   padding: 20px;
 }
 
+.sidebar h2 {
+  margin-bottom: 20px;
+}
+
 .sidebar button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
@@ -46,10 +53,26 @@
   color: white;
   text-align: left;
   cursor: pointer;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.sidebar button:hover {
+  background: rgba(255,255,255,0.1);
 }
 
 .sidebar .active {
   background: #3b82f6;
+}
+
+/* ✕ caché sur desktop */
+.close-sidebar {
+  display: none;
+}
+
+/* Burger caché sur desktop */
+.burger-btn {
+  display: none;
 }
 
 /* CONTENT */
@@ -90,57 +113,67 @@
   background: #22c55e;
 }
 
-
-
-
-
-
-/* ===================== TOGGLE ===================== */
-.toggle-btn {
-  display: none;
-  background: transparent;
-  border: none;
-  color: white;
-  font-size: 22px;
-  margin-bottom: 10px;
-  cursor: pointer;
-}
-
 /* ===================== MOBILE ===================== */
 @media (max-width: 768px) {
 
+  .livreur-hero {
+    height: 35vh;
+  }
+
+  .livreur-hero-overlay h1 { font-size: 24px; }
+  .livreur-hero-overlay p { font-size: 14px; }
+
   .livreur-container {
     flex-direction: column;
+    margin-top: 0;
   }
 
-  /* SIDEBAR COLLAPSIBLE */
+  /* Sidebar cachée par défaut */
   .sidebar {
+    display: none;
     width: 100%;
+  }
+
+  /* Sidebar ouverte */
+  .sidebar.open {
     display: flex;
     flex-direction: column;
-    max-height: 60px;
-    overflow: hidden;
-    transition: 0.3s ease;
   }
 
-  .sidebar.open {
-    max-height: 500px;
-  }
-
-  .toggle-btn {
+  /* ✕ visible dans la sidebar ouverte */
+  .close-sidebar {
     display: block;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    align-self: flex-end;
+    margin-bottom: 10px;
+    width: auto;
+    padding: 0;
   }
 
-  .sidebar h2 {
-    display: none;
-  }
+  .sidebar h2 { display: none; }
 
-  .sidebar button {
-    width: 100%;
-    text-align: left;
+  /* Burger visible sur mobile */
+  .burger-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #3E2C23;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-bottom: 20px;
+    width: fit-content;
   }
 
   .content {
     padding: 15px;
+    padding-bottom: 60px;
   }
 }

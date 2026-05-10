@@ -5,10 +5,9 @@ import {
     FaBox,
     FaTruck,
     FaCheck,
-    FaMapMarkerAlt,
     FaUser,
-    FaMoneyBill,
-    FaBars
+    FaBars,
+    FaTimes
 } from "react-icons/fa";
 import CommandesLivreur from "../../components/CommandesLivreur/CommandesLivreur";
 import ProfilLivreur from "../../components/ProfilLivreur/ProfilLivreur";
@@ -17,7 +16,7 @@ import LivreesLivreur from "../../components/LivreesLivreur/LivreesLivreur";
 const Livreur = () => {
 
     const [page, setPage] = useState("commandes");
-    const [open, setOpen] = useState(false); // 🔥 TOGGLE
+    const [open, setOpen] = useState(false);
 
     const menu = [
         { key: "profil", label: "Profil", icon: <FaUser /> },
@@ -40,12 +39,12 @@ const Livreur = () => {
             {/* CONTAINER */}
             <div className="livreur-container">
 
-                {/* SIDEBAR */}
+                {/* SIDEBAR — toujours visible desktop, cachée mobile */}
                 <div className={`sidebar ${open ? "open" : ""}`}>
 
-                    {/* TOGGLE */}
-                    <button className="toggle-btn" onClick={() => setOpen(!open)}>
-                        <FaBars />
+                    {/* ✕ visible uniquement sur mobile */}
+                    <button className="close-sidebar" onClick={() => setOpen(false)}>
+                        <FaTimes />
                     </button>
 
                     <h2>Livreur</h2>
@@ -56,7 +55,7 @@ const Livreur = () => {
                             className={page === item.key ? "active" : ""}
                             onClick={() => {
                                 setPage(item.key);
-                                setOpen(false); // 🔥 ferme menu après clic
+                                setOpen(false);
                             }}
                         >
                             {item.icon} {item.label}
@@ -67,13 +66,14 @@ const Livreur = () => {
                 {/* CONTENT */}
                 <div className="content">
 
-                    {page === "commandes" && <CommandesLivreur/>}
+                    {/* BURGER — caché desktop, visible mobile */}
+                    <button className="burger-btn" onClick={() => setOpen(!open)}>
+                        <FaBars /> Menu
+                    </button>
 
+                    {page === "commandes" && <CommandesLivreur />}
                     {page === "enCours" && <LivraisonsEnCours />}
-
                     {page === "livrees" && <LivreesLivreur />}
-
-                   
                     {page === "profil" && <ProfilLivreur />}
 
                 </div>

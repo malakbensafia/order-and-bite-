@@ -16,7 +16,7 @@ const Header = ({ setShowLogin, setRole, setAuthMode, setRoleFixed, user }) => {
       return navigate("/")
     }
 
-    // 🔐 sinon ouverture login
+    //  sinon ouverture login
     setRole("client")
     setRoleFixed(true)
     setAuthMode("Se connecter")
@@ -34,7 +34,7 @@ const Header = ({ setShowLogin, setRole, setAuthMode, setRoleFixed, user }) => {
 
           <p>Livraison rapide • Réservation • Expérience premium</p>
 
-          {/* 🔥 caché si user connecté (même logique que Services) */}
+          {/* caché si user connecté (même logique que Services) */}
           {!user && (
             <button onClick={handleClick}>
               Explorer le menu

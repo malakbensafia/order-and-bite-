@@ -14,7 +14,7 @@ import {
 } from "../../api/adresseApi";
 import SuiviLivraison from "../../components/SuiviLivraison/SuiviLivraison";
 import ReservationsClient from "../../components/ReservationsClient/ReservationsClient";
-import { getPoints, getHistorique } from "../../api/fideliteApi"; 
+import { getPoints, getHistorique } from "../../api/fideliteApi";
 import MesCommandes from "../../components/MesCommandes/MesCommandes";
 
 const labelType = (type) => {
@@ -38,7 +38,7 @@ const Dashboard = ({ user }) => {
     const [showSuggestions, setShowSuggestions] = useState(false);
     const [gpsLoading, setGpsLoading] = useState(false);
 
-    // ✅ AJOUTÉ
+
     const [points, setPoints] = useState(0);
     const [historique, setHistorique] = useState([]);
 
@@ -48,14 +48,14 @@ const Dashboard = ({ user }) => {
         { key: "commandes", label: "Mes commandes", icon: <FaShoppingBag /> },
         { key: "reservations", label: "Mes réservations", icon: <FaCalendarCheck /> },
         { key: "suivi", label: "Suivi livraison", icon: <FaMapMarkerAlt /> },
-        { key: "fidelite", label: "Fidélité", icon: <FaStar /> }, // ✅ AJOUTÉ
+        { key: "fidelite", label: "Fidélité", icon: <FaStar /> },
     ];
 
     useEffect(() => {
         if (user?.idutilisateur) {
             fetchAddresses();
-            getPoints(user.idutilisateur).then(setPoints);        // ✅ AJOUTÉ
-            getHistorique(user.idutilisateur).then(setHistorique); // ✅ AJOUTÉ
+            getPoints(user.idutilisateur).then(setPoints);
+            getHistorique(user.idutilisateur).then(setHistorique);
         }
     }, [user]);
 
@@ -128,6 +128,9 @@ const Dashboard = ({ user }) => {
             </div>
 
             <div className="client-dashboard">
+                <button className="burger-btn" onClick={() => setOpen(true)}>
+                    <FaBars /> Menu
+                </button>
 
                 {/* PROFIL */}
                 {page === "profil" && (
@@ -146,7 +149,7 @@ const Dashboard = ({ user }) => {
                                 <div className="info-row"><span><FaUser /> Nom</span><strong>{user?.nom}</strong></div>
                                 <div className="info-row"><span><FaEnvelope /> Email</span><strong>{user?.email}</strong></div>
                                 <div className="info-row"><span><FaPhone /> Téléphone</span><strong>{user?.telephone}</strong></div>
-                                {/* ✅ AJOUTÉ */}
+
                                 <div className="info-row">
                                     <span><FaStar color="#f5a623" /> Points fidélité</span>
                                     <strong>{points} pts</strong>
@@ -229,7 +232,7 @@ const Dashboard = ({ user }) => {
                     </div>
                 )}
 
-              {page === "commandes" && <MesCommandes user={user} />}
+                {page === "commandes" && <MesCommandes user={user} />}
                 {page === "reservations" && <ReservationsClient user={user} />}
                 {page === "suivi" && <SuiviLivraison />}
 
@@ -282,6 +285,7 @@ const Dashboard = ({ user }) => {
             </div>
         </div>
     );
+
 };
 
 export default Dashboard;
